@@ -1,0 +1,11 @@
+### get para tareas
+GET http://localhost:8080/tareas
+
+### post de login de usuario
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "usuario": "Allis",
+  "password": "1234"
+}
