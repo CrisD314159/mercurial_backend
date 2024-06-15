@@ -1,11 +1,15 @@
 import { Router } from 'express'
 import MercurialControllerUser from '../controller/userController'
 import MercurialControllerSubject from '../controller/subjectController'
+import MercurialControllerTask from '../controller/taskController'
+import MercurialControllerTopic from '../controller/topicController'
 
 export default function Routes ({ model }) {
   const router = Router()
   const userController = new MercurialControllerUser({ model })
   const subjectController = new MercurialControllerSubject({ model })
+  const taskController = new MercurialControllerTask({ model })
+  const topicController = new MercurialControllerTopic({ model })
 
   // Métodos de usuario
   router.get('/users/:id', userController.getUser) // obtener un usuario dado un id
@@ -21,21 +25,23 @@ export default function Routes ({ model }) {
   router.delete('/subjects/:id', subjectController.deleteSubject)
 
   // Métodos de tareas
-  router.get('/taks/:id',)
-  router.get('tasks/suject/:id',)
-  router.post('/tasks',)
-  router.put('/tasks/:id',)
-  router.delete('/tasks/:id',)
+  router.get('/taks/:id', taskController.getTaskId)
+  router.get('tasks/suject/:id', taskController.getUserTasks)
+  router.post('/tasks', taskController.createTask)
+  router.put('/tasks/:id', taskController.updateTask)
+  router.delete('/tasks/:id', taskController.deleteTask)
 
   // Métodos de tipo
-  router.get('/topics/:id',)
-  router.get('/topics/user/:id',)
-  router.post('/topics',)
-  router.put('/topics/:id',)
-  router.delete('/topics/:id',)
+  router.get('/topics/:id', topicController.getTopicId)
+  router.get('/topics/user/:id', topicController.getUsertopics)
+  router.post('/topics', topicController.createTopic)
+  router.put('/topics/:id', topicController.updateTopic)
+  router.delete('/topics/:id', topicController.deleteTopic)
 
   return router
 }
+
+// hola cris _v
 
 /*
   Export= permite exportar varias clases o metodos con el fin de que pueda ser importado en otro archivo
