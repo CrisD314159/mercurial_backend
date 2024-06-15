@@ -20,7 +20,19 @@ export default function Routes ({ model }) {
   router.put('/subjects/:id', subjectController.updateSubject)
   router.delete('/subjects/:id', subjectController.deleteSubject)
 
-  // Resto de metodos Tareas, Tipo
+  // Métodos de tareas
+  router.get('/taks/:id',)
+  router.get('tasks/suject/:id',)
+  router.post('/tasks',)
+  router.put('/tasks/:id',)
+  router.delete('/tasks/:id',)
+
+  // Métodos de tipo
+  router.get('/topics/:id',)
+  router.get('/topics/user/:id',)
+  router.post('/topics',)
+  router.put('/topics/:id',)
+  router.delete('/topics/:id',)
 
   return router
 }
