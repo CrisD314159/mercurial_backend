@@ -6,6 +6,6 @@ const topic = z.object({
 
 })
 
-export function verifyTopic (object) {
+export function verifytopic (object) {
   return topic.partial().safeParse(object)
 }

@@ -1,4 +1,4 @@
-import { verifyTopic, verifytopic } from "./validations/topicValidations"
+import { verifyTopic } from "./validations/topicValidations"
 
 export default class MercurialControllerTopic {
   constructor ({ model }) {
