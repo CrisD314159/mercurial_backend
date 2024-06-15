@@ -1,11 +1,55 @@
-### get para tareas
-GET http://localhost:8080/tareas
 
-### post de login de usuario
-POST http://localhost:8080/login
+### Test de usuarios
+
+### get de usuarios 
+GET http://localhost:8080/users/100546
+
+
+### post de usuarios
+POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "usuario": "Allis",
-  "password": "1234"
+  "name":"Juan", "email":"juan@gmail.com", "username":"juan1234", "password":"1234567890"
 }
+
+### put de usuarios 
+PUT http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
+Content-Type: application/json
+
+{
+  "name":"Juan Emilio Molano", "email":"juansito@gmail.com", "username":"juanMasterKiller", "password":"1234567890"
+}
+
+### delete de usuarios
+DELETE  http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
+
+
+### Test de asignaturas
+
+### obtener una asignatura por su id
+GET http://localhost:8080/subjects/777
+
+
+###obtener las asignaturas de un usuario
+GET http://localhost:8080/subjects/user/100546
+
+### crear una asignatura
+POST http://localhost:8080/subjects
+Content-Type: application/json
+
+{
+  "name":"Matematicas", "color":"#FFFFFF", "userId":"100546"
+}
+
+
+### modificar una asignatura
+PUT http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24
+Content-Type: application/json
+
+{
+  "name":"Matematicas", "color":"#000000"
+}
+
+### eliminar una asignatura
+DELETE http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24

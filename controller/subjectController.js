@@ -1,4 +1,4 @@
-import { verifySubject } from './validations/subjectValidations'
+import { verifySubject } from './validations/subjectValidations.js'
 
 export default class MercurialControllerSubject {
   constructor ({ model }) {
@@ -8,7 +8,7 @@ export default class MercurialControllerSubject {
   // Metodos de asignaturas
 
   // Obtener una asignatura dado un id
-  async getSubjectById (req, res) {
+  getSubjectById = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -22,7 +22,7 @@ export default class MercurialControllerSubject {
   }
 
   // Obtener las asignaturas de un usuario
-  async getUserSubjects (req, res) {
+  getUserSubjects = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -36,12 +36,12 @@ export default class MercurialControllerSubject {
   }
 
   // Crear una asignatura
-  async createSubject (req, res) {
+  createSubject = async (req, res) => {
     if (req.body) {
-      const { title, description, userId } = req.body
+      const { name, color, userId } = req.body
       const input = {
-        title,
-        description
+        name,
+        color
       }
       const response = verifySubject(input)
       if (response.success) {
@@ -58,13 +58,13 @@ export default class MercurialControllerSubject {
     }
   }
 
-  async updateSubject (req, res) {
+  updateSubject = async (req, res) => {
     if (req.body && req.params.id) {
       const { id } = req.params
-      const { title, description } = req.body
+      const { name, color } = req.body
       const input = {
-        title,
-        description
+        name,
+        color
       }
       const response = verifySubject(input)
       if (response.success) {
@@ -81,7 +81,7 @@ export default class MercurialControllerSubject {
     }
   }
 
-  async deleteSubject (req, res) {
+  deleteSubject = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {

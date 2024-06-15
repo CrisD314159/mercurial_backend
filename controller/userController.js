@@ -1,6 +1,5 @@
-import { verifyUser, verifyUserPartial } from './validations/userValidations'
-
-export default class MercurialControllerUser {
+import { verifyUser, verifyUserPartial } from './validations/userValidations.js'
+export class MercurialControllerUser {
   constructor ({ model }) {
     this.model = model
   }
@@ -8,7 +7,7 @@ export default class MercurialControllerUser {
   // Metodos de usuario
 
   // Obtener un usuario dado un id
-  async getUser (req, res) {
+  getUser = async (req, res) => {
     const { id } = req.params
     if (id) {
       try {
@@ -23,7 +22,7 @@ export default class MercurialControllerUser {
   }
 
   // Crear un usuario
-  async createUser (req, res) {
+  createUser = async (req, res) => {
     if (req.body) {
       const { name, email, username, password } = req.body
       const input = {
@@ -48,7 +47,7 @@ export default class MercurialControllerUser {
   }
 
   // Actualizar un usuario dado un id
-  async updateUser (req, res) {
+  updateUser = async (req, res) => {
     if (req.body && req.params.id) {
       const { id } = req.params
       const { name, username, password } = req.body
@@ -71,7 +70,7 @@ export default class MercurialControllerUser {
   }
 
   // Eliminar un usuario dado un id
-  async deleteUser (req, res) {
+  deleteUser = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {

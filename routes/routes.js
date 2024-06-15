@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import MercurialControllerUser from '../controller/userController'
-import MercurialControllerSubject from '../controller/subjectController'
-import MercurialControllerTask from '../controller/taskController'
-import MercurialControllerTopic from '../controller/topicController'
+import { MercurialControllerUser } from '../controller/userController.js'
+import MercurialControllerSubject from '../controller/subjectController.js'
+import MercurialControllerTask from '../controller/taskController.js'
+import MercurialControllerTopic from '../controller/topicController.js'
 
 export default function Routes ({ model }) {
   const router = Router()
@@ -10,6 +10,16 @@ export default function Routes ({ model }) {
   const subjectController = new MercurialControllerSubject({ model })
   const taskController = new MercurialControllerTask({ model })
   const topicController = new MercurialControllerTopic({ model })
+  /**
+   en los controladores usamos metodos flecha (arrow functions)
+   method = async(req, res) => {}
+
+    en vez de los metodo tradicionales
+    async function(req, res) {}
+
+    esto porque los metodos flecha no crean un nuevo contexto de this, por lo que no es necesario hacer un bind
+    por lo tanto son mejores y mas faciles de usar
+   */
 
   // Métodos de usuario
   router.get('/users/:id', userController.getUser) // obtener un usuario dado un id

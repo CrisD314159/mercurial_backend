@@ -1,4 +1,4 @@
-import { verifyTopic } from "./validations/topicValidations"
+import { verifytopic } from './validations/topicValidations.js'
 
 export default class MercurialControllerTopic {
   constructor ({ model }) {
@@ -7,7 +7,7 @@ export default class MercurialControllerTopic {
 
   // Metodos de tipo
 
-  async getTopicId (req, res) {
+  getTopicId = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -19,10 +19,9 @@ export default class MercurialControllerTopic {
       }
     }
   }
-  
 
   // Obtener las tareas de una asignatura
-  async getUsertopics (req, res) {
+  getUsertopics = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -36,13 +35,13 @@ export default class MercurialControllerTopic {
   }
 
   // Crear una tarea
-  async createTopic (req, res) {
+  createTopic = async (req, res) => {
     if (req.body) {
       const { title, userId } = req.body
       const input = {
         title
       }
-      const response = verifyTopic(input)
+      const response = verifytopic(input)
       if (response.success) {
         try {
           const topic = await this.model.createTopic(input, userId)
@@ -58,14 +57,14 @@ export default class MercurialControllerTopic {
   }
 
   // Actualizar una tarea
-  async updateTopic (req, res) {
+  updateTopic = async (req, res) => {
     if (req.body && req.params.id) {
       const { id } = req.params
-      const { title, userId } = req.body
+      const { title } = req.body
       const input = {
         title
       }
-      const response = verifyTopic(input)
+      const response = verifytopic(input)
       if (response.success) {
         try {
           const topic = await this.model.updateTopic(id, input)
@@ -81,7 +80,7 @@ export default class MercurialControllerTopic {
   }
 
   // Eliminar una tarea
-  async deleteTopic (req, res) {
+  deleteTopic = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
