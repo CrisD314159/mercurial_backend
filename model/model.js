@@ -1,5 +1,7 @@
 import { User } from './User.js'
 import { Subject } from './subject.js'
+import { Task } from './task.js'
+import { Topic } from './topic.js'
 
 export class MercurialModel {
   // Metodos de usuario
@@ -52,5 +54,55 @@ export class MercurialModel {
 
   // Metodos de tipo
 
+  static async getTopicId (id) {
+    const response = await Topic.getTopicId(id)
+    return response
+  }
+
+  static async getUserTopics (id) {
+    const response = await Topic.getUserTopics(id)
+    return response
+  }
+
+  static async createTopic (input, userId) {
+    const response = await Topic.createTopic(input, userId)
+    return response
+  }
+
+  static async updateTopic (id, input) {
+    const response = await Topic.updateTopic(id, input)
+    return response
+  }
+
+  static async deleteTopic (id) {
+    const response = await Topic.deleteTopic(id)
+    return response
+  }
+
   // Metodos de tareas
+
+  static async getTaskById (id) {
+    const response = await Task.getTaskById(id)
+    return response
+  }
+
+  static async getTasks (id) {
+    const response = await Task.getTasks(id)
+    return response
+  }
+
+  static async createTask (input, subjectId, topicId) {
+    const response = await Task.createTask(input, subjectId, topicId)
+    return response
+  }
+
+  static async updateTask (id, input) {
+    const response = await Task.updateTask(id, input)
+    return response
+  }
+
+  static async deleteTask (id) {
+    const response = await Task.deleteTask(id)
+    return response
+  }
 }

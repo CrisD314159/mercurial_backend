@@ -10,3 +10,14 @@ export const statesSubject = {
   done: '3'
 
 } // Estos son los estados de la tabla de state de la base de datos
+
+export const statesTask = {
+  active: '1',
+  deleted: '2',
+  done: '3'
+} // Estos son los estados de la tabla de task de la base de datos
+
+export const statesTopic = {
+  active: '1',
+  inactive: '2'
+} // Estos son los estados de la tabla de topic de la base de datos
