@@ -3,13 +3,13 @@ import postgres from 'postgres'
 // const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env
 
 export const sql = postgres({
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
-  username: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
+  host: 'ep-old-sun-a480frai.us-east-1.aws.neon.tech',
+  database: 'mercurial',
+  username: 'starDB_owner',
+  password: 'fd2UeI8ATwOR',
   port: 5432,
   ssl: 'require',
   connection: {
-    options: `project=${process.env.ENDPOINT_ID}`
+    options: `project=${'ep-old-sun-a480frai'}`
   }
 })

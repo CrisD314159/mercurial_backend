@@ -15,10 +15,10 @@ export class Task {
     if (!exists) {
       throw new Error('Subject does not exists')
     }
-    const response = await sql`select * from task where subject_id = ${id} and state_id = ${statesTask.active} and topic_id = ${id}`
+    const response = await sql`select * from task where subject_id = ${id} and state_id = ${statesTask.active}`
     if (!response[0]) return false
     return response
-  }
+  } // falta agregar método filtrar por tipo
 
   static async createTask (input, subjectId, topicId) {
     const { tittle, description } = input

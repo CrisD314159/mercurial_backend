@@ -38,15 +38,15 @@ export default class MercurialControllerTask {
   // Crear una tarea
   createTask = async (req, res) => {
     if (req.body) {
-      const { title, description, subjectId } = req.body
+      const { tittle, description, subjectId, topicId } = req.body
       const input = {
-        title,
+        tittle,
         description
       }
       const response = verifyTask(input)
       if (response.success) {
         try {
-          const task = await this.model.createTask(input, subjectId)
+          const task = await this.model.createTask(input, subjectId, topicId)
           if (!task) return res.status(440).json({ success: false, message: 'Impossible to create task' })
           return res.json({ success: true, message: 'Task created' })
         } catch (e) {
@@ -62,9 +62,9 @@ export default class MercurialControllerTask {
   updateTask = async (req, res) => {
     if (req.body && req.params.id) {
       const { id } = req.params
-      const { title, description } = req.body
+      const { tittle, description } = req.body
       const input = {
-        title,
+        tittle,
         description
       }
       const response = verifyTask(input)

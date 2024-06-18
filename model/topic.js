@@ -13,20 +13,20 @@ export class Topic {
     if (!exists) {
       throw new Error('User does not exists')
     }
-    const response = await sql`select * from topic where user_id = ${id}`
+    const response = await sql`select * from topic where usuario_id = ${id}`
     if (!response[0]) return false
     return response
   }
 
   static async createTopic (input, userId) {
-    const { title, color } = input
+    const { tittle, color } = input
     const exists = await User.getUser(userId)
     if (!exists) {
       throw new Error('User does not exists')
     }
     try {
       const id = crypto.randomUUID()
-      await sql`insert into topic (id, title, user_id, color, state) values (${id}, ${title}, ${userId}, ${color}, ${statesTopic.active})`
+      await sql`insert into topic (id, tittle, usuario_id, color, state) values (${id}, ${tittle}, ${userId}, ${color}, ${statesTopic.active})`
       return true
     } catch (error) {
       return false
@@ -34,19 +34,21 @@ export class Topic {
   }
 
   static async updateTopic (id, input) {
-    const { title } = input
+    const { tittle, color } = input
     const active = await this.getTopicById(id)
     if (!active) {
       throw new Error('Topic does not exists')
     }
     try {
       const response = sql.begin(async sql => {
-        if (title) {
-          await sql`update topic set title = ${title} where id = ${id}`
+        if (tittle) {
+          await sql`update topic set tittle = ${tittle} where id = ${id}`
+        }
+        if (color) {
+          await sql`update topic set color = ${color} where id = ${id}`
         }
         return true
       })
-
       return response
     } catch (e) {
       return false

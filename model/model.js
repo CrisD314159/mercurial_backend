@@ -2,6 +2,7 @@ import { User } from './User.js'
 import { Subject } from './subject.js'
 import { Task } from './task.js'
 import { Topic } from './topic.js'
+import ImageCloudinary from './utils/imageService.js'
 
 export class MercurialModel {
   // Metodos de usuario
@@ -103,6 +104,11 @@ export class MercurialModel {
 
   static async deleteTask (id) {
     const response = await Task.deleteTask(id)
+    return response
+  }
+
+  static async uploadImage (image) {
+    const response = await ImageCloudinary.uploadImage(image)
     return response
   }
 }

@@ -37,9 +37,9 @@ export default class MercurialControllerTopic {
   // Crear una tarea
   createTopic = async (req, res) => {
     if (req.body) {
-      const { title, color, userId } = req.body
+      const { tittle, color, userId } = req.body
       const input = {
-        title,
+        tittle,
         color
       }
       const response = verifytopic(input)
@@ -61,9 +61,10 @@ export default class MercurialControllerTopic {
   updateTopic = async (req, res) => {
     if (req.body && req.params.id) {
       const { id } = req.params
-      const { title } = req.body
+      const { tittle, color } = req.body
       const input = {
-        title
+        tittle,
+        color
       }
       const response = verifytopic(input)
       if (response.success) {

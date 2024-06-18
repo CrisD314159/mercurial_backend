@@ -1,8 +1,10 @@
 import { Router } from 'express'
+import multer from 'multer'
 import { MercurialControllerUser } from '../controller/userController.js'
 import MercurialControllerSubject from '../controller/subjectController.js'
 import MercurialControllerTask from '../controller/taskController.js'
 import MercurialControllerTopic from '../controller/topicController.js'
+import ImageController from '../controller/imageController.js'
 
 export default function Routes ({ model }) {
   const router = Router()
@@ -10,6 +12,8 @@ export default function Routes ({ model }) {
   const subjectController = new MercurialControllerSubject({ model })
   const taskController = new MercurialControllerTask({ model })
   const topicController = new MercurialControllerTopic({ model })
+  const imageController = new ImageController({ model })
+  const upload = multer({ dest: 'uploads/' })
   /**
    en los controladores usamos metodos flecha (arrow functions)
    method = async(req, res) => {}
@@ -36,7 +40,7 @@ export default function Routes ({ model }) {
 
   // Métodos de tareas
   router.get('/taks/:id', taskController.getTaskId)
-  router.get('tasks/suject/:id', taskController.getTasks)
+  router.get('/tasks/subject/:id', taskController.getTasks)
   router.post('/tasks', taskController.createTask)
   router.put('/tasks/:id', taskController.updateTask)
   router.delete('/tasks/:id', taskController.deleteTask)
@@ -47,6 +51,9 @@ export default function Routes ({ model }) {
   router.post('/topics', topicController.createTopic)
   router.put('/topics/:id', topicController.updateTopic)
   router.delete('/topics/:id', topicController.deleteTopic)
+
+  // ruta de image
+  router.post('/image/cloudinary', upload.single('image'), imageController.uploadImage)
 
   return router
 }

@@ -53,3 +53,44 @@ Content-Type: application/json
 
 ### eliminar una asignatura
 DELETE http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24
+
+### Test de tareas
+
+### obteber tareas de una asignatura
+GET http://localhost:8080/tasks/subject/777
+
+### Actualizar una tarea
+PUT http://localhost:8080/tasks/988e61f8-8825-4869-8cf0-e25c722cfcf8
+Content-Type: application/json
+
+{
+  "tittle": "Tarea de cálculo integral", "description": "Hacer las integrales", "subjectId": "777", "topicId": "00fa5630-e284-47f0-b7dd-af2fa6176e6f"
+}
+
+### crear una tarea
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "tittle": "Tarea de matematicas", "description": "Hacer la tarea de matematicas", "subjectId": "777", "topicId": "00fa5630-e284-47f0-b7dd-af2fa6176e6f"
+}
+
+
+### Obtener tipos de usuario
+GET http://localhost:8080/topics/user/100546
+
+### crear tipo
+POST http://localhost:8080/topics
+Content-Type: application/json
+
+{
+  "tittle": "Examen", "color": "#FFFFFF", "userId":"100546"
+}
+
+### actualizar tipo
+PUT http://localhost:8080/topics/00fa5630-e284-47f0-b7dd-af2fa6176e6f
+Content-Type: application/json
+
+{
+  "tittle": "Quiz", "color": "#00000", "userId":"100546"
+}
