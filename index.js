@@ -1,6 +1,5 @@
 import express from 'express'
 import Routes from './routes/routes.js'
-import 'dotenv/config'
 import { MercurialModel } from './model/model.js'
 
 // Ecmascript
@@ -15,7 +14,7 @@ app.use(express.json())
 app.use('/', Routes({ model: MercurialModel }))
 
 app.listen(port, () => {
-  console.log(`Servidor corriendo en el puerto http://localhost:${port}`)
+  console.log(`Servidor corriendo en el puerto http://localhost:${port}}`)
 })
 
 //

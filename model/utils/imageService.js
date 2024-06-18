@@ -1,10 +1,11 @@
 // Aqui pondremos el servicio de imagenes de cloudinary
 // Este servicio se encargara de subir imagenes a cloudinary y de obtener la url de la imagen para subirlo a la base de datos
 import { v2 as cloudinary } from 'cloudinary'
+process.loadEnvFile()
 cloudinary.config({
   cloud_name: 'dyig9g14u',
   api_key: '147298787567336',
-  api_secret: 'TQ0XBCVQ0fo5GUKw1uEoLbU0BtA'
+  api_secret: process.env.API_KEY
 })
 
 export default class ImageCloudinary {
