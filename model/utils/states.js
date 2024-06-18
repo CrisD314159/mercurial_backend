@@ -19,5 +19,5 @@ export const statesTask = {
 
 export const statesTopic = {
   active: '1',
-  inactive: '2'
+  deleted: '2'
 } // Estos son los estados de la tabla de topic de la base de datos

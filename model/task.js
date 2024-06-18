@@ -13,7 +13,7 @@ export class Task {
   static async getTasks (id) {
     const exists = await Subject.getSubjectById(id)
     if (!exists) {
-      throw new Error('Subjec does not exists')
+      throw new Error('Subject does not exists')
     }
     const response = await sql`select * from task where subject_id = ${id} and state_id = ${statesTask.active} and topic_id = ${id}`
     if (!response[0]) return false
@@ -24,7 +24,7 @@ export class Task {
     const { tittle, description } = input
     const exists = await Subject.getSubjectById(subjectId) && await Topic.getTopicById(topicId)
     if (!exists) {
-      throw new Error('Subjec does not exists')
+      throw new Error('Subject does not exists')
     }
     try {
       const id = crypto.randomUUID()

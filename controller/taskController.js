@@ -22,11 +22,11 @@ export default class MercurialControllerTask {
   }
 
   // Obtener las tareas de una asignatura
-  getUserTasks = async (req, res) => {
+  getTasks = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
-        const tasks = await this.model.getUserTasks(id)
+        const tasks = await this.model.getTasks(id)
         if (!tasks) return res.status(440).json({ success: false, message: 'Tasks not found' })
         return res.json({ tasks })
       } catch (e) {

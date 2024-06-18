@@ -7,11 +7,11 @@ export default class MercurialControllerTopic {
 
   // Metodos de tipo
 
-  getTopicId = async (req, res) => {
+  getTopicById = async (req, res) => {
     if (req.params.id) {
       const { id } = req.params
       try {
-        const topic = await this.model.getTopicId(id)
+        const topic = await this.model.getTopicById(id)
         if (!topic) return res.status(440).json({ suceess: false, message: 'topic not found' })
         return res.json({ topic })
       } catch (e) {
@@ -37,9 +37,10 @@ export default class MercurialControllerTopic {
   // Crear una tarea
   createTopic = async (req, res) => {
     if (req.body) {
-      const { title, userId } = req.body
+      const { title, color, userId } = req.body
       const input = {
-        title
+        title,
+        color
       }
       const response = verifytopic(input)
       if (response.success) {
