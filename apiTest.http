@@ -13,6 +13,14 @@ Content-Type: application/json
   "name":"Crisali", "email":"allisonhincapie259@gmail.com", "username":"Crisali21", "password":"1234567890", "image":"https://firebasestorage.googleapis.com/v0/b/star-neutron.appspot.com/o/background-1.png?alt=media&token=53458d0f-f4bd-452a-be2a-dad4a74e3ad7"
 }
 
+### post de usuarios
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name":"Allicris", "email":"vargasloaizacristian@gmail.com", "username":"Allicris123", "password":"1234567890", "image":"https://firebasestorage.googleapis.com/v0/b/star-neutron.appspot.com/o/background-1.png?alt=media&token=53458d0f-f4bd-452a-be2a-dad4a74e3ad7"
+}
+
 ### put de usuarios 
 PUT http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
 Content-Type: application/json
