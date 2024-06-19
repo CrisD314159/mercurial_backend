@@ -10,7 +10,7 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "name":"Kelly", "email":"kelpe@gmail.com", "username":"kelly1ea", "password":"1234567890", "image":"https://firebasestorage.googleapis.com/v0/b/star-neutron.appspot.com/o/background-1.png?alt=media&token=53458d0f-f4bd-452a-be2a-dad4a74e3ad7"
+  "name":"Crisali", "email":"allisonhincapie259@gmail.com", "username":"Crisali21", "password":"1234567890", "image":"https://firebasestorage.googleapis.com/v0/b/star-neutron.appspot.com/o/background-1.png?alt=media&token=53458d0f-f4bd-452a-be2a-dad4a74e3ad7"
 }
 
 ### put de usuarios 
@@ -58,6 +58,9 @@ DELETE http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24
 
 ### obteber tareas de una asignatura
 GET http://localhost:8080/tasks/subject/777
+
+### obtener tareas de un usuario
+GET http://localhost:8080/tasks/user/100546
 
 ### Actualizar una tarea
 PUT http://localhost:8080/tasks/988e61f8-8825-4869-8cf0-e25c722cfcf8

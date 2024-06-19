@@ -2,10 +2,16 @@ import { Subject } from './subject.js'
 import { Topic } from './topic.js'
 import { sql } from './utils/bdConnection.js'
 import { statesTask } from './utils/states.js'
+import { User } from './User.js'
 
 export class Task {
   static async getTaskById (id) {
-    const response = await sql`select * from task where id = ${id} and state_id = ${statesTask.active}`
+    const response = await sql`
+    SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle FROM task t 
+    JOIN state s on t.state_id = s.id
+    JOIN subject sub on t.subject_id = sub.id
+    JOIN topic top on t.topic_id = top.id
+    WHERE t.id = ${id} AND t.state_id = ${statesTask.active};`
     if (!response[0]) return false
     return response[0]
   }
@@ -15,10 +21,30 @@ export class Task {
     if (!exists) {
       throw new Error('Subject does not exists')
     }
-    const response = await sql`select * from task where subject_id = ${id} and state_id = ${statesTask.active}`
+    const response = await sql`
+      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle FROM task t 
+      JOIN state s on t.state_id = s.id
+      JOIN subject sub on t.subject_id = sub.id
+      JOIN topic top on t.topic_id = top.id
+      WHERE t.subject_id = ${id} AND t.state_id = ${statesTask.active};`
     if (!response[0]) return false
     return response
   } // falta agregar método filtrar por tipo
+
+  static async getUserTasks (id) {
+    const exists = await User.getUser(id)
+    if (!exists) {
+      throw new Error('User does not exists')
+    }
+    const response = await sql`
+      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle  FROM task t 
+      JOIN state s on t.state_id = s.id
+      JOIN subject sub on t.subject_id = sub.id
+      JOIN topic top on t.topic_id = top.id
+      WHERE sub.usuario_id = ${id} AND t.state_id = ${statesTask.active}`
+    if (!response[0]) return false
+    return response
+  }
 
   static async createTask (input, subjectId, topicId) {
     const { tittle, description } = input

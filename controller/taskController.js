@@ -35,6 +35,19 @@ export default class MercurialControllerTask {
     }
   }
 
+  getUserTasks = async (req, res) => {
+    if (req.params.id) {
+      const { id } = req.params
+      try {
+        const tasksUser = await this.model.getUserTasks(id)
+        if (!tasksUser) return res.status(440).json({ success: false, message: 'Tasks of the user not found' })
+        return res.json({ tasksUser })
+      } catch (e) {
+        throw new Error(e)
+      }
+    }
+  }
+
   // Crear una tarea
   createTask = async (req, res) => {
     if (req.body) {

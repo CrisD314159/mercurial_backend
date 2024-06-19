@@ -2,6 +2,7 @@ import { sql } from './utils/bdConnection.js'
 import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 import { statesUser } from './utils/states.js'
+import EmailService from './utils/emailService.js'
 export class User {
   static async getUser (id) {
     const result = await sql`select * from usuario where id = ${id} and state = ${statesUser.active}`
@@ -19,16 +20,11 @@ export class User {
     return false
   }
 
-  static async createUser (input) {
-    const { name, email, username, password, image } = input
-    const id = crypto.randomUUID()
-    const exists = await this.getUserByEmailUsername(username, email)
+  // luego implementaremos el servicio de imagenes para que nos devuelva la url de la imagen
 
-    // luego implementaremos el servicio de imagenes para que nos devuelva la url de la imagen
-
-    // Me toco añadir dos columnas en la tabla de usuario, una para el estado del usuario y otra para la url de la imagen
-    // por consecuencia, también tuve que añadir una tabla para administrar el estado del usuario
-    /**
+  // Me toco añadir dos columnas en la tabla de usuario, una para el estado del usuario y otra para la url de la imagen
+  // por consecuencia, también tuve que añadir una tabla para administrar el estado del usuario
+  /**
      * para añadir una columna a una base de datos usamos
      * alter table nombre_tbala
      *  add nombre_columna tipo_dato
@@ -40,6 +36,10 @@ export class User {
      * Estos fueron los comandos que usé para añadir las columnas
      */
 
+  static async createUser (input) {
+    const { name, email, username, password, image } = input
+    const id = crypto.randomUUID()
+    const exists = await this.getUserByEmailUsername(username, email)
     if (!exists) {
       const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
       try {
@@ -48,6 +48,8 @@ export class User {
         } else {
           await sql`insert into usuario (id, name, email, username, password, state) values (${id}, ${name}, ${email}, ${username}, ${hashedPassword}, ${statesUser.unverified} )`
         }
+        await EmailService.sendEmailVerify({ email, id })
+        // if (!emailResponse) throw new Error('Error sending email')
         return true
       } catch (e) {
         return false

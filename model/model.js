@@ -97,6 +97,11 @@ export class MercurialModel {
     return response
   }
 
+  static async getUserTasks (id) {
+    const response = await Task.getUserTasks(id)
+    return response
+  }
+
   static async createTask (input, subjectId, topicId) {
     const response = await Task.createTask(input, subjectId, topicId)
     return response

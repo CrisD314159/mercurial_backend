@@ -42,6 +42,7 @@ export default function Routes ({ model }) {
   // Métodos de tareas
   router.get('/taks/:id', taskController.getTaskId)
   router.get('/tasks/subject/:id', taskController.getTasks)
+  router.get('/tasks/user/:id', taskController.getUserTasks)
   router.post('/tasks', taskController.createTask)
   router.put('/tasks/:id', taskController.updateTask)
   router.delete('/tasks/:id', taskController.deleteTask)

@@ -3,7 +3,11 @@ import { sql } from './utils/bdConnection.js'
 import { statesSubject } from './utils/states.js'
 export class Subject {
   static async getSubjectById (id) {
-    const response = await sql`select * from subject where id = ${id} and state_id = ${statesSubject.active}`
+    const response = await sql`
+    SELECT sub.id, sub.name, sub.color, s.id as state_id, s.name as state_name, u.id as user_id, u.name as user_name, u.image as user_image FROM subject sub
+    JOIN state s on sub.state_id = s.id
+    JOIN usuario u on sub.usuario_id = u.id
+    WHERE sub.id = ${id} AND sub.state_id = ${statesSubject.active};`
     if (!response[0]) return false
     return response[0]
   }
@@ -13,7 +17,11 @@ export class Subject {
     if (!exists) {
       throw new Error('User does not exists')
     }
-    const response = await sql`select * from subject where usuario_id = ${id} and state_id = ${statesSubject.active}`
+    const response = await sql`
+    SELECT sub.id, sub.name, sub.color, s.id as state_id, s.name as state_name, u.id as user_id, u.name as user_name, u.image as user_image FROM subject sub
+    JOIN state s on sub.state_id = s.id
+    JOIN usuario u on sub.usuario_id = u.id
+    WHERE u.id = ${id} AND sub.state_id = ${statesSubject.active}`
     if (!response[0]) return false
     return response
   }
