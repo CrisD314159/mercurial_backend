@@ -10,7 +10,7 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "name":"Juan", "email":"juan@gmail.com", "username":"juan1234", "password":"1234567890"
+  "name":"Kelly", "email":"kelpe@gmail.com", "username":"kelly1ea", "password":"1234567890", "image":"https://firebasestorage.googleapis.com/v0/b/star-neutron.appspot.com/o/background-1.png?alt=media&token=53458d0f-f4bd-452a-be2a-dad4a74e3ad7"
 }
 
 ### put de usuarios 

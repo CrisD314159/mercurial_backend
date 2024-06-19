@@ -29,7 +29,8 @@ export default function Routes ({ model }) {
   router.get('/users/:id', userController.getUser) // obtener un usuario dado un id
   router.post('/users', userController.createUser) // crear un usuario
   router.put('/users/:id', userController.updateUser) // actualizar un usuario dado un id
-  router.delete('/users/:id', userController.deleteUser)
+  router.delete('/users/:id', userController.deleteUser) // eliminar un usuario dado un id
+  router.put('/users/password/change', userController.changePassword) // cambiar la contraseña de un usuario
 
   // Metodos de asignaturas
   router.get('/subjects/:id', subjectController.getSubjectById) // obtener una asignatura dado un id

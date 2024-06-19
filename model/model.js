@@ -26,6 +26,11 @@ export class MercurialModel {
     return response
   }
 
+  static async changePassword (input) {
+    const response = await User.changePassword(input)
+    return response
+  }
+
   // Metodos de asignaturas
 
   static async getSubjectById (id) {

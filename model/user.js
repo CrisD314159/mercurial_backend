@@ -20,7 +20,7 @@ export class User {
   }
 
   static async createUser (input) {
-    const { name, email, username, password } = input
+    const { name, email, username, password, image } = input
     const id = crypto.randomUUID()
     const exists = await this.getUserByEmailUsername(username, email)
 
@@ -43,7 +43,11 @@ export class User {
     if (!exists) {
       const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
       try {
-        await sql`insert into usuario (id, name, email, username, password,  state) values (${id}, ${name}, ${email}, ${username}, ${hashedPassword}, ${statesUser.unverified} )`
+        if (image) {
+          await sql`insert into usuario (id, name, email, username, password, image, state) values (${id}, ${name}, ${email}, ${username}, ${hashedPassword}, ${image}, ${statesUser.unverified} )`
+        } else {
+          await sql`insert into usuario (id, name, email, username, password, state) values (${id}, ${name}, ${email}, ${username}, ${hashedPassword}, ${statesUser.unverified} )`
+        }
         return true
       } catch (e) {
         return false
@@ -55,7 +59,7 @@ export class User {
 
   // Actualizar un usuario dado un id
   static async updateUser (id, input) {
-    const { name, username, password } = input
+    const { name, username, password, image } = input
     const exists = await this.getUser(id)
     if (!exists) {
       throw new Error('User does not exists')
@@ -74,6 +78,9 @@ export class User {
         if (password) {
           const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
           await sql`update usuario set password = ${hashedPassword} where id = ${id}`
+        }
+        if (image) {
+          await sql`update usuario set image = ${image} where id = ${id}`
         }
         return true // si todo sale bien, retornamos true
         // En caso de que exista un error, lo arrojará y además en la base de datos se producira un rollback y se desharán los cambios
@@ -94,6 +101,21 @@ export class User {
     try {
       // Como para la aplicaion estamos usando borrado logico, lo que haremos es cambiar el estado del usuario a inactivo no borrarlo por completo
       await sql`update usuario set state = ${statesUser.inactive} where id = ${id}`
+      return true
+    } catch (e) {
+      return false
+    }
+  }
+
+  static async changePassword (id, input) {
+    const { email, password } = input
+    const exists = await this.getUser(id)
+    if (!exists) {
+      throw new Error('User does not exists')
+    }
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
+      await sql`update usuario set password = ${hashedPassword} where id = ${id} and email = ${email}`
       return true
     } catch (e) {
       return false

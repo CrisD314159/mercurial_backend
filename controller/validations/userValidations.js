@@ -4,7 +4,8 @@ const user = z.object({ // objeto de tipo zod
   name: z.string().min(3),
   email: z.string().email(),
   username: z.string().min(5).max(30),
-  password: z.string().min(8).max(40)
+  password: z.string().min(8).max(40),
+  image: z.string().url().optional()
 
 })
 

@@ -24,12 +24,13 @@ export class MercurialControllerUser {
   // Crear un usuario
   createUser = async (req, res) => {
     if (req.body) {
-      const { name, email, username, password } = req.body
+      const { name, email, username, password, image } = req.body
       const input = {
         name,
         email,
         username,
-        password
+        password,
+        image
       }
       const respuesta = verifyUser(input)
       if (respuesta.success) {
@@ -50,11 +51,12 @@ export class MercurialControllerUser {
   updateUser = async (req, res) => {
     if (req.body && req.params.id) {
       const { id } = req.params
-      const { name, username, password } = req.body
+      const { name, username, password, image } = req.body
       const input = {
         name,
         username,
-        password
+        password,
+        image
       }
       const response = verifyUserPartial(input)
       if (response.success) {
@@ -62,6 +64,26 @@ export class MercurialControllerUser {
           const user = await this.model.updateUser(id, input)
           if (!user) return res.status(440).json({ suceess: false, message: 'User not found' })
           return res.json({ success: true, message: 'User updated' })
+        } catch (e) {
+          throw new Error(e)
+        }
+      }
+    }
+  }
+
+  changePassword = async (req, res) => {
+    if (req.body) {
+      const { id, email, password } = req.body
+      const input = {
+        email,
+        password
+      }
+      const response = verifyUserPartial(input)
+      if (response.success) {
+        try {
+          const user = await this.model.changePassword(id, input)
+          if (!user) return res.status(440).json({ suceess: false, message: 'User not found' })
+          return res.json({ success: true, message: 'Password changed' })
         } catch (e) {
           throw new Error(e)
         }
