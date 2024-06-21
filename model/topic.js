@@ -1,4 +1,4 @@
-import { User } from './User.js'
+import { User } from './user.js'
 import { sql } from './utils/bdConnection.js'
 import { statesTopic } from './utils/states.js'
 export class Topic {
