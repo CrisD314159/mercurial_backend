@@ -5,6 +5,14 @@ import { statesUser } from './utils/states.js'
 import EmailService from './utils/emailService.js'
 export class User {
   static async getUser (id) {
+    const result = await sql`select id, name, email, username, image from usuario where id = ${id} and state = ${statesUser.active}`
+    if (!result[0]) return false
+    if (result[0].state === statesUser.unverified) throw new Error('You must verify your account first to continue')
+
+    return result[0] // retornamos el usuario
+  }
+
+  static async getUserPass (id) {
     const result = await sql`select * from usuario where id = ${id} and state = ${statesUser.active}`
     if (!result[0]) return false
     if (result[0].state === statesUser.unverified) throw new Error('You must verify your account first to continue')

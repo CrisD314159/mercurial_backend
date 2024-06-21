@@ -40,7 +40,7 @@ export default class EmailService {
         subject: 'Reset your password',
         html: `
         <p>Estimado usuario,</p>
-        <p>Haz clic en el siguiente botón para resetear tu contraseña:</p>
+        <p>Haz clic en el siguiente botón para restablecer tu contraseña:</p>
         <a href="https://mercurial-app.vercel.app/users/reset/password/${id}" class="button"><button>Resetear contraseña</button></a>
         <p>Equipo de Mercurial</p>`
       })
