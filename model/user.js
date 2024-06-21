@@ -36,6 +36,13 @@ export class User {
     return false
   }
 
+  static async getUserByEmail (email) {
+    const result = await sql`select * from usuario where email = ${email} and state = ${statesUser.active}`
+    if (result[0]) return result[0]
+
+    return false
+  }
+
   // luego implementaremos el servicio de imagenes para que nos devuelva la url de la imagen
 
   // Me toco añadir dos columnas en la tabla de usuario, una para el estado del usuario y otra para la url de la imagen

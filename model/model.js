@@ -2,6 +2,7 @@ import { User } from './user.js'
 import { Subject } from './subject.js'
 import { Task } from './task.js'
 import { Topic } from './topic.js'
+import { Login } from './login.js'
 import ImageCloudinary from './utils/imageService.js'
 
 export class MercurialModel {
@@ -144,6 +145,11 @@ export class MercurialModel {
 
   static async rollBackTask (id) {
     const response = await Task.rollBackTask(id)
+    return response
+  }
+
+  static async login (input) {
+    const response = await Login.login(input)
     return response
   }
 }

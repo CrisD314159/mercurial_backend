@@ -4,6 +4,7 @@ import { MercurialControllerUser } from '../controller/userController.js'
 import MercurialControllerSubject from '../controller/subjectController.js'
 import MercurialControllerTask from '../controller/taskController.js'
 import MercurialControllerTopic from '../controller/topicController.js'
+import MercurialControllerLogin from '../controller/loginController.js'
 import ImageController from '../controller/imageController.js'
 
 export default function Routes ({ model }) {
@@ -13,6 +14,7 @@ export default function Routes ({ model }) {
   const taskController = new MercurialControllerTask({ model })
   const topicController = new MercurialControllerTopic({ model })
   const imageController = new ImageController({ model })
+  const loginController = new MercurialControllerLogin({ model })
   const upload = multer({ dest: 'uploads/' })
   /**
    en los controladores usamos metodos flecha (arrow functions)
@@ -61,6 +63,9 @@ export default function Routes ({ model }) {
 
   // ruta de image
   router.post('/image/cloudinary', upload.single('image'), imageController.uploadImage)
+
+  // ruta de login
+  router.post('/login', loginController.login)
 
   return router
 }

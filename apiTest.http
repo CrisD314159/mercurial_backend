@@ -122,3 +122,11 @@ Content-Type: application/json
 {
   "tittle": "Quiz", "color": "#00000", "userId":"100546"
 }
+
+### login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "allisonhincapie259@gmail.com", "password": "1234567890"
+}

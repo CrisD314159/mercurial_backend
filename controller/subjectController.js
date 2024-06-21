@@ -23,6 +23,7 @@ export default class MercurialControllerSubject {
 
   // Obtener las asignaturas de un usuario
   getUserSubjects = async (req, res) => {
+    if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {
