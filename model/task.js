@@ -2,7 +2,7 @@ import { Subject } from './subject.js'
 import { Topic } from './topic.js'
 import { sql } from './utils/bdConnection.js'
 import { statesTask } from './utils/states.js'
-import { User } from './User.js'
+import { User } from './user.js'
 
 export class Task {
   static async getTaskById (id) {
@@ -12,6 +12,14 @@ export class Task {
     JOIN subject sub on t.subject_id = sub.id
     JOIN topic top on t.topic_id = top.id
     WHERE t.id = ${id} AND t.state_id = ${statesTask.active};`
+    if (!response[0]) return false
+    return response[0]
+  }
+
+  static async getTaskByIdDone (id) {
+    const response = await sql`
+    SELECT * from task 
+    WHERE id = ${id} AND state_id = ${statesTask.done};`
     if (!response[0]) return false
     return response[0]
   }
@@ -91,6 +99,47 @@ export class Task {
     }
     try {
       await sql`update task set state_id = ${statesTask.deleted} where id = ${id}`
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  static async getDoneTasks (id) {
+    const exists = await User.getUser(id)
+    if (!exists) {
+      throw new Error('User does not exists')
+    }
+    const response = await sql`
+      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle  FROM task t 
+      JOIN state s on t.state_id = s.id
+      JOIN subject sub on t.subject_id = sub.id
+      JOIN topic top on t.topic_id = top.id
+      WHERE sub.usuario_id = ${id} AND t.state_id = ${statesTask.done}`
+    if (!response[0]) return false
+    return response
+  }
+
+  static async markTaskAsDone (id) {
+    const active = await this.getTaskById(id)
+    if (!active) {
+      throw new Error('Task does not exists')
+    }
+    try {
+      await sql`update task set state_id = ${statesTask.done} where id = ${id}`
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  static async rollBackTask (id) {
+    const done = await this.getTaskByIdDone(id)
+    if (!done) {
+      throw new Error('Task does not exists')
+    }
+    try {
+      await sql`update task set state_id = ${statesTask.active} where id = ${id}`
       return true
     } catch (error) {
       return false

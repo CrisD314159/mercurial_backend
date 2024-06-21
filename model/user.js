@@ -12,6 +12,14 @@ export class User {
     return result[0] // retornamos el usuario
   }
 
+  static async getUserNotVerified (id) {
+    const result = await sql`select * from usuario where id = ${id} and state = ${statesUser.unverified}`
+    if (!result[0]) return false
+    if (result[0].state === statesUser.active) throw new Error('Your account is already verified')
+
+    return result[0] // retornamos el usuario
+  }
+
   static async getUserByEmailUsername (username, email) {
     // Verificamos si el usuario o el email ya existen en la base de datos, para no permitir duplicados
     const result = await sql`select * from usuario where username = ${username} or email = ${email}`
@@ -118,7 +126,22 @@ export class User {
     try {
       const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
       await sql`update usuario set password = ${hashedPassword} where id = ${id} and email = ${email}`
+      await EmailService.passwordChangeConfirmation({ email })
       return true
+    } catch (e) {
+      return false
+    }
+  }
+
+  static async sendEmailChangePassword (input) {
+    const { email } = input
+    const exists = await this.getUserByEmailUsername(null, email)
+    if (!exists) {
+      throw new Error('User does not exists')
+    }
+    try {
+      const user = await EmailService.sendEmailResetPassword({ email })
+      return user
     } catch (e) {
       return false
     }
@@ -126,7 +149,7 @@ export class User {
 
   // este metodo los usaremos mas adelante para verificar un usuario una vez presione el link de verificación que le llega al correo
   static async verifyUser (id) {
-    const exists = await this.getUser(id)
+    const exists = await this.getUserNotVerified(id)
     if (!exists) {
       throw new Error('User does not exists')
     }

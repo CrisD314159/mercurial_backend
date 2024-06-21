@@ -29,6 +29,9 @@ Content-Type: application/json
   "name":"Juan Emilio Molano", "email":"juansito@gmail.com", "username":"juanMasterKiller", "password":"1234567890"
 }
 
+### verificar cuanta usuario
+PUT http://localhost:8080/users/account/verify/f574f967-311c-4eb7-aee7-eb926a5f013d
+
 ### delete de usuarios
 DELETE  http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
 
@@ -40,14 +43,14 @@ GET http://localhost:8080/subjects/777
 
 
 ###obtener las asignaturas de un usuario
-GET http://localhost:8080/subjects/user/100546
+GET http://localhost:8080/subjects/user/f574f967-311c-4eb7-aee7-eb926a5f013d
 
 ### crear una asignatura
 POST http://localhost:8080/subjects
 Content-Type: application/json
 
 {
-  "name":"Matematicas", "color":"#FFFFFF", "userId":"100546"
+  "name":"Algebra", "color":"#FFFFFF", "userId":"f574f967-311c-4eb7-aee7-eb926a5f013d"
 }
 
 
@@ -68,7 +71,21 @@ DELETE http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24
 GET http://localhost:8080/tasks/subject/777
 
 ### obtener tareas de un usuario
-GET http://localhost:8080/tasks/user/100546
+GET http://localhost:8080/tasks/user/f574f967-311c-4eb7-aee7-eb926a5f013d
+
+### Marcar una tarea como completada
+PUT http://localhost:8080/tasks/mark/done/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+
+### Marcar una tarea como activa otra vez (rollback)
+PUT http://localhost:8080/tasks/roll/back/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+
+### obtener las tareas completadas
+GET http://localhost:8080/tasks/done/user
+Content-Type: application/json
+
+{
+  "id":"f574f967-311c-4eb7-aee7-eb926a5f013d"
+}
 
 ### Actualizar una tarea
 PUT http://localhost:8080/tasks/988e61f8-8825-4869-8cf0-e25c722cfcf8
@@ -83,19 +100,19 @@ POST http://localhost:8080/tasks
 Content-Type: application/json
 
 {
-  "tittle": "Tarea de matematicas", "description": "Hacer la tarea de matematicas", "subjectId": "777", "topicId": "00fa5630-e284-47f0-b7dd-af2fa6176e6f"
+  "tittle": "Completar los ejercios algebra", "description": "Hacer la tarea de algrbra de lo de gauss jordan", "subjectId": "15e560f2-3b36-4edd-ad6a-7b7dc22e50d2", "topicId": "0127aada-f597-440f-9a02-0b9a7640db62"
 }
 
 
 ### Obtener tipos de usuario
-GET http://localhost:8080/topics/user/100546
+GET http://localhost:8080/topics/user/f574f967-311c-4eb7-aee7-eb926a5f013d
 
 ### crear tipo
 POST http://localhost:8080/topics
 Content-Type: application/json
 
 {
-  "tittle": "Examen", "color": "#FFFFFF", "userId":"100546"
+  "tittle": "Proyecto", "color": "#FFFFFF", "userId":"f574f967-311c-4eb7-aee7-eb926a5f013d"
 }
 
 ### actualizar tipo

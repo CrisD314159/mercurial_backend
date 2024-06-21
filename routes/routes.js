@@ -31,6 +31,8 @@ export default function Routes ({ model }) {
   router.put('/users/:id', userController.updateUser) // actualizar un usuario dado un id
   router.delete('/users/:id', userController.deleteUser) // eliminar un usuario dado un id
   router.put('/users/password/change', userController.changePassword) // cambiar la contraseña de un usuario
+  router.post('/users/password/change/email', userController.sendEmailChangePassword) // enviar un correo para cambiar la contraseña
+  router.put('/users/account/verify/:id', userController.verifyUser) // verificar un usuario dado un id
 
   // Metodos de asignaturas
   router.get('/subjects/:id', subjectController.getSubjectById) // obtener una asignatura dado un id
@@ -43,9 +45,12 @@ export default function Routes ({ model }) {
   router.get('/taks/:id', taskController.getTaskId)
   router.get('/tasks/subject/:id', taskController.getTasks)
   router.get('/tasks/user/:id', taskController.getUserTasks)
+  router.get('/tasks/done/user', taskController.getDoneTasks)
   router.post('/tasks', taskController.createTask)
   router.put('/tasks/:id', taskController.updateTask)
   router.delete('/tasks/:id', taskController.deleteTask)
+  router.put('/tasks/mark/done/:id', taskController.markTaskAsDone)
+  router.put('/tasks/roll/back/:id', taskController.rollBackTask)
 
   // Métodos de tipo
   router.get('/topics/:id', topicController.getTopicById)

@@ -30,4 +30,41 @@ export default class EmailService {
       throw new Error(e)
     }
   }
+
+  static async sendEmailResetPassword (input) {
+    const { email, id } = input
+    try {
+      await smtp.sendMail({
+        from: `Mercurial Team <${process.env.EMAIL}>`,
+        to: email,
+        subject: 'Reset your password',
+        html: `
+        <p>Estimado usuario,</p>
+        <p>Haz clic en el siguiente botón para resetear tu contraseña:</p>
+        <a href="https://mercurial-app.vercel.app/users/reset/password/${id}" class="button"><button>Resetear contraseña</button></a>
+        <p>Equipo de Mercurial</p>`
+      })
+      return true
+    } catch (e) {
+      throw new Error(e)
+    }
+  }
+
+  static async passwordChangeConfirmation (input) {
+    const { email } = input
+    try {
+      await smtp.sendMail({
+        from: `Mercurial Team <${process.env.EMAIL}>`,
+        to: email,
+        subject: 'Password changed',
+        html: `
+        <p>Estimado usuario,</p>
+        <p>Tu contraseña ha sido cambiada exitosamente.</p>
+        <p>Equipo de Mercurial</p>`
+      })
+      return true
+    } catch (e) {
+      throw new Error(e)
+    }
+  }
 }

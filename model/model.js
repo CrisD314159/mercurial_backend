@@ -1,4 +1,4 @@
-import { User } from './User.js'
+import { User } from './user.js'
 import { Subject } from './subject.js'
 import { Task } from './task.js'
 import { Topic } from './topic.js'
@@ -28,6 +28,21 @@ export class MercurialModel {
 
   static async changePassword (input) {
     const response = await User.changePassword(input)
+    return response
+  }
+
+  static async sendEmailChangePassword (input) {
+    const response = await User.sendEmailChangePassword(input)
+    return response
+  }
+
+  static async uploadImage (image) {
+    const response = await ImageCloudinary.uploadImage(image)
+    return response
+  }
+
+  static async verifyUser (id) {
+    const response = await User.verifyUser(id)
     return response
   }
 
@@ -117,8 +132,18 @@ export class MercurialModel {
     return response
   }
 
-  static async uploadImage (image) {
-    const response = await ImageCloudinary.uploadImage(image)
+  static async getDoneTasks (id) {
+    const response = await Task.getDoneTasks(id)
+    return response
+  }
+
+  static async markTaskAsDone (id) {
+    const response = await Task.markTaskAsDone(id)
+    return response
+  }
+
+  static async rollBackTask (id) {
+    const response = await Task.rollBackTask(id)
     return response
   }
 }

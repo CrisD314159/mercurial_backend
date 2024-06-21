@@ -91,6 +91,19 @@ export class MercurialControllerUser {
     }
   }
 
+  sendEmailChangePassword = async (req, res) => {
+    if (req.body) {
+      const { email } = req.body
+      try {
+        const user = await this.model.sendEmailChangePassword(email)
+        if (!user) return res.status(440).json({ suceess: false, message: 'User not found' })
+        return res.json({ success: true, message: 'Email sent' })
+      } catch (e) {
+        throw new Error(e)
+      }
+    }
+  }
+
   // Eliminar un usuario dado un id
   deleteUser = async (req, res) => {
     if (req.params.id) {
@@ -99,6 +112,20 @@ export class MercurialControllerUser {
         const response = await this.model.deleteUser(id)
         if (!response) return res.status(440).json({ suceess: false, message: 'Impossible to delete user' })
         return res.json({ success: true, message: 'User deleted' })
+      } catch (e) {
+        throw new Error(e)
+      }
+    }
+  }
+
+  // verificar la cuenta de un usuario
+  verifyUser = async (req, res) => {
+    if (req.params.id) {
+      const { id } = req.params
+      try {
+        const response = await this.model.verifyUser(id)
+        if (!response) return res.status(440).json({ suceess: false, message: 'Impossible to verify user' })
+        return res.json({ success: true, message: 'User verified' })
       } catch (e) {
         throw new Error(e)
       }

@@ -108,4 +108,45 @@ export default class MercurialControllerTask {
       }
     }
   }
+
+  // Obtener las tareas completadas de un usuario
+  getDoneTasks = async (req, res) => {
+    const { id } = req.body
+    if (id) {
+      try {
+        const tasks = await this.model.getDoneTasks(id)
+        if (!tasks) return res.status(440).json({ success: false, message: 'Tasks not found' })
+        return res.json({ tasks })
+      } catch (e) {
+        throw new Error(e)
+      }
+    }
+  }
+
+  // Marcar una tarea como completada
+  markTaskAsDone = async (req, res) => {
+    const { id } = req.params
+    if (id) {
+      try {
+        const response = await this.model.markTaskAsDone(id)
+        if (!response) return res.status(440).json({ success: false, message: 'Task not found' })
+        return res.json({ success: true, message: 'Task marked as done' })
+      } catch (error) {
+
+      }
+    }
+  }
+
+  rollBackTask = async (req, res) => {
+    if (req.params.id) {
+      const { id } = req.params
+      try {
+        const response = await this.model.rollBackTask(id)
+        if (!response) return res.status(440).json({ success: false, message: 'Task not found' })
+        return res.json({ success: true, message: 'Task rolled back' })
+      } catch (error) {
+        throw new Error(error)
+      }
+    }
+  }
 }
