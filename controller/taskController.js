@@ -9,6 +9,7 @@ export default class MercurialControllerTask {
 
   // Obtener una tarea dado un id
   getTaskId = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' }) // Verificar si el usuario esta logeado
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -23,6 +24,7 @@ export default class MercurialControllerTask {
 
   // Obtener las tareas de una asignatura
   getTasks = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -36,8 +38,8 @@ export default class MercurialControllerTask {
   }
 
   getUserTasks = async (req, res) => {
-    if (req.params.id) {
-      const { id } = req.params
+    if (req.session) {
+      const { id } = req.session.user
       try {
         const tasksUser = await this.model.getUserTasks(id)
         if (!tasksUser) return res.status(440).json({ success: false, message: 'Tasks of the user not found' })
@@ -45,11 +47,14 @@ export default class MercurialControllerTask {
       } catch (e) {
         throw new Error(e)
       }
+    } else {
+      return res.status(401).json({ success: false, message: 'Unauthorized' })
     }
   }
 
   // Crear una tarea
   createTask = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.body) {
       const { tittle, description, subjectId, topicId } = req.body
       const input = {
@@ -73,6 +78,7 @@ export default class MercurialControllerTask {
 
   // Actualizar una tarea dado un id
   updateTask = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.body && req.params.id) {
       const { id } = req.params
       const { tittle, description } = req.body
@@ -97,6 +103,7 @@ export default class MercurialControllerTask {
 
   // Eliminar una tarea
   deleteTask = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -111,8 +118,8 @@ export default class MercurialControllerTask {
 
   // Obtener las tareas completadas de un usuario
   getDoneTasks = async (req, res) => {
-    const { id } = req.body
-    if (id) {
+    if (req.session) {
+      const { id } = req.session.user
       try {
         const tasks = await this.model.getDoneTasks(id)
         if (!tasks) return res.status(440).json({ success: false, message: 'Tasks not found' })
@@ -120,11 +127,14 @@ export default class MercurialControllerTask {
       } catch (e) {
         throw new Error(e)
       }
+    } else {
+      return res.status(401).json({ success: false, message: 'Unauthorized' })
     }
   }
 
   // Marcar una tarea como completada
   markTaskAsDone = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     const { id } = req.params
     if (id) {
       try {
@@ -138,6 +148,7 @@ export default class MercurialControllerTask {
   }
 
   rollBackTask = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {

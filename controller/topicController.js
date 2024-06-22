@@ -8,6 +8,7 @@ export default class MercurialControllerTopic {
   // Metodos de tipo
 
   getTopicById = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -22,8 +23,8 @@ export default class MercurialControllerTopic {
 
   // Obtener las tareas de una asignatura
   getUsertopics = async (req, res) => {
-    if (req.params.id) {
-      const { id } = req.params
+    if (req.session) {
+      const { id } = req.session.user
       try {
         const topic = await this.model.getUserTopics(id)
         if (!topic) return res.status(440).json({ suceess: false, message: 'topics not found' })
@@ -31,13 +32,16 @@ export default class MercurialControllerTopic {
       } catch (e) {
         throw new Error(e)
       }
+    } else {
+      return res.status(401).json({ success: false, message: 'Unauthorized' })
     }
   }
 
   // Crear una tarea
   createTopic = async (req, res) => {
-    if (req.body) {
-      const { tittle, color, userId } = req.body
+    if (req.session) {
+      const { tittle, color } = req.body
+      const { id } = req.session.user
       const input = {
         tittle,
         color
@@ -45,7 +49,7 @@ export default class MercurialControllerTopic {
       const response = verifytopic(input)
       if (response.success) {
         try {
-          const topic = await this.model.createTopic(input, userId)
+          const topic = await this.model.createTopic(input, id)
           if (!topic) return res.status(440).json({ success: false, message: 'Impossible to create topic' })
           return res.json({ success: true, message: 'Topic created' })
         } catch (e) {
@@ -54,11 +58,14 @@ export default class MercurialControllerTopic {
       } else {
         return res.status(440).json({ success: false, message: 'Invalid input' })
       }
+    } else {
+      return res.status(401).json({ success: false, message: 'Unauthorized' })
     }
   }
 
   // Actualizar una tarea
   updateTopic = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.body && req.params.id) {
       const { id } = req.params
       const { tittle, color } = req.body
@@ -83,6 +90,7 @@ export default class MercurialControllerTopic {
 
   // Eliminar una tarea
   deleteTopic = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {

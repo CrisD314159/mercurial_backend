@@ -26,4 +26,8 @@ export default class MercurialControllerLogin {
       }
     }
   }
+
+  logout = async (req, res) => {
+    return res.clearCookie('authMercurial').json({ success: true, message: 'Logout successfull' })
+  }
 }

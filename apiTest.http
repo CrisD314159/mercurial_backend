@@ -29,11 +29,20 @@ Content-Type: application/json
   "name":"Juan Emilio Molano", "email":"juansito@gmail.com", "username":"juanMasterKiller", "password":"1234567890"
 }
 
-### verificar cuanta usuario
+### verificar cuenta usuario
 PUT http://localhost:8080/users/account/verify/f574f967-311c-4eb7-aee7-eb926a5f013d
 
 ### delete de usuarios
 DELETE  http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
+
+
+
+
+
+
+
+
+
 
 
 ### Test de asignaturas
@@ -43,7 +52,8 @@ GET http://localhost:8080/subjects/777
 
 
 ###obtener las asignaturas de un usuario
-GET http://localhost:8080/subjects/user/f574f967-311c-4eb7-aee7-eb926a5f013d
+## no es necesario enviar el id del usuario, ya que se toma el id del usuario desde la cookie
+GET http://localhost:8080/subjects/user/active
 
 ### crear una asignatura
 POST http://localhost:8080/subjects
@@ -55,7 +65,7 @@ Content-Type: application/json
 
 
 ### modificar una asignatura
-PUT http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24
+PUT http://localhost:8080/subjects/68701f50-52af-4d4c-a058-a507124f8287
 Content-Type: application/json
 
 {
@@ -63,15 +73,23 @@ Content-Type: application/json
 }
 
 ### eliminar una asignatura
-DELETE http://localhost:8080/subjects/bb713829-d7d3-4137-9ec7-fd105bc46f24
+DELETE http://localhost:8080/subjects/68701f50-52af-4d4c-a058-a507124f8287
+
+
+
+
+
+
+
 
 ### Test de tareas
 
 ### obteber tareas de una asignatura
-GET http://localhost:8080/tasks/subject/777
+GET http://localhost:8080/tasks/subject/15e560f2-3b36-4edd-ad6a-7b7dc22e50d2
 
 ### obtener tareas de un usuario
-GET http://localhost:8080/tasks/user/f574f967-311c-4eb7-aee7-eb926a5f013d
+## no es necesario enviar el id del usuario, ya que se toma el id del usuario desde la cookie
+GET http://localhost:8080/tasks/user/active
 
 ### Marcar una tarea como completada
 PUT http://localhost:8080/tasks/mark/done/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
@@ -81,18 +99,14 @@ PUT http://localhost:8080/tasks/roll/back/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
 
 ### obtener las tareas completadas
 GET http://localhost:8080/tasks/done/user
-Content-Type: application/json
 
-{
-  "id":"f574f967-311c-4eb7-aee7-eb926a5f013d"
-}
 
 ### Actualizar una tarea
-PUT http://localhost:8080/tasks/988e61f8-8825-4869-8cf0-e25c722cfcf8
+PUT http://localhost:8080/tasks/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
 Content-Type: application/json
 
 {
-  "tittle": "Tarea de cálculo integral", "description": "Hacer las integrales", "subjectId": "777", "topicId": "00fa5630-e284-47f0-b7dd-af2fa6176e6f"
+  "tittle": "Estudiar para el parcial", "description": "Estudiar para el parcial de algebra"
 }
 
 ### crear una tarea
@@ -100,33 +114,56 @@ POST http://localhost:8080/tasks
 Content-Type: application/json
 
 {
-  "tittle": "Completar los ejercios algebra", "description": "Hacer la tarea de algrbra de lo de gauss jordan", "subjectId": "15e560f2-3b36-4edd-ad6a-7b7dc22e50d2", "topicId": "0127aada-f597-440f-9a02-0b9a7640db62"
+  "tittle": "Estudiar gauss jordan", "description": "Hacer algunos ejercicios", "subjectId": "15e560f2-3b36-4edd-ad6a-7b7dc22e50d2", "topicId": "0127aada-f597-440f-9a02-0b9a7640db62"
 }
+
+### eliminar una tarea
+DELETE http://localhost:8080/tasks/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+
+
+
+
+
+
+
+### Test de topics
 
 
 ### Obtener tipos de usuario
-GET http://localhost:8080/topics/user/f574f967-311c-4eb7-aee7-eb926a5f013d
+GET http://localhost:8080/topics/user/active
 
 ### crear tipo
 POST http://localhost:8080/topics
 Content-Type: application/json
 
 {
-  "tittle": "Proyecto", "color": "#FFFFFF", "userId":"f574f967-311c-4eb7-aee7-eb926a5f013d"
+  "tittle": "Parcial", "color": "#FFFFFF", "userId":"f574f967-311c-4eb7-aee7-eb926a5f013d"
 }
 
 ### actualizar tipo
-PUT http://localhost:8080/topics/00fa5630-e284-47f0-b7dd-af2fa6176e6f
+PUT http://localhost:8080/topics/66f4a0eb-377d-4ce4-a02e-98082c550913
 Content-Type: application/json
 
 {
-  "tittle": "Quiz", "color": "#00000", "userId":"100546"
+  "tittle": "Taller", "color": "#00000"
 }
+
+### eliminar un tipo
+DELETE http://localhost:8080/topics/66f4a0eb-377d-4ce4-a02e-98082c550913
+
+
+
+
+
+
 
 ### login
 POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "allisonhincapie259@gmail.com", "password": "1234567890"
+  "email": "vargasloaizacristian@gmail.com", "password": "1234567890"
 }
+
+### logout
+POST http://localhost:8080/logout

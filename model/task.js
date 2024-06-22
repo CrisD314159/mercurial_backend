@@ -12,7 +12,7 @@ export class Task {
     JOIN subject sub on t.subject_id = sub.id
     JOIN topic top on t.topic_id = top.id
     WHERE t.id = ${id} AND t.state_id = ${statesTask.active};`
-    if (!response[0]) return false
+    if (!response[0] || response[0].stateid === statesTask.done) return false
     return response[0]
   }
 

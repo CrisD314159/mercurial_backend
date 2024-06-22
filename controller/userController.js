@@ -49,8 +49,9 @@ export class MercurialControllerUser {
 
   // Actualizar un usuario dado un id
   updateUser = async (req, res) => {
-    if (req.body && req.params.id) {
-      const { id } = req.params
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
+    if (req.body) {
+      const { id } = req.session.user
       const { name, username, password, image } = req.body
       const input = {
         name,
@@ -106,6 +107,7 @@ export class MercurialControllerUser {
 
   // Eliminar un usuario dado un id
   deleteUser = async (req, res) => {
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
     if (req.params.id) {
       const { id } = req.params
       try {

@@ -13,7 +13,7 @@ export class Topic {
     if (!exists) {
       throw new Error('User does not exists')
     }
-    const response = await sql`select * from topic where usuario_id = ${id}`
+    const response = await sql`select * from topic where usuario_id = ${id} and state = ${statesTopic.active}`
     if (!response[0]) return false
     return response
   }

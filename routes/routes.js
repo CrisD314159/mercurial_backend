@@ -30,7 +30,7 @@ export default function Routes ({ model }) {
   // Métodos de usuario
   router.get('/users/:id', userController.getUser) // obtener un usuario dado un id
   router.post('/users', userController.createUser) // crear un usuario
-  router.put('/users/:id', userController.updateUser) // actualizar un usuario dado un id
+  router.put('/users', userController.updateUser) // actualizar un usuario dado un id
   router.delete('/users/:id', userController.deleteUser) // eliminar un usuario dado un id
   router.put('/users/password/change', userController.changePassword) // cambiar la contraseña de un usuario
   router.post('/users/password/change/email', userController.sendEmailChangePassword) // enviar un correo para cambiar la contraseña
@@ -38,7 +38,7 @@ export default function Routes ({ model }) {
 
   // Metodos de asignaturas
   router.get('/subjects/:id', subjectController.getSubjectById) // obtener una asignatura dado un id
-  router.get('/subjects/user/:id', subjectController.getUserSubjects)
+  router.get('/subjects/user/active', subjectController.getUserSubjects)
   router.post('/subjects', subjectController.createSubject)
   router.put('/subjects/:id', subjectController.updateSubject)
   router.delete('/subjects/:id', subjectController.deleteSubject)
@@ -46,7 +46,7 @@ export default function Routes ({ model }) {
   // Métodos de tareas
   router.get('/taks/:id', taskController.getTaskId)
   router.get('/tasks/subject/:id', taskController.getTasks)
-  router.get('/tasks/user/:id', taskController.getUserTasks)
+  router.get('/tasks/user/active', taskController.getUserTasks)
   router.get('/tasks/done/user', taskController.getDoneTasks)
   router.post('/tasks', taskController.createTask)
   router.put('/tasks/:id', taskController.updateTask)
@@ -56,7 +56,7 @@ export default function Routes ({ model }) {
 
   // Métodos de tipo
   router.get('/topics/:id', topicController.getTopicById)
-  router.get('/topics/user/:id', topicController.getUsertopics)
+  router.get('/topics/user/active', topicController.getUsertopics)
   router.post('/topics', topicController.createTopic)
   router.put('/topics/:id', topicController.updateTopic)
   router.delete('/topics/:id', topicController.deleteTopic)
@@ -66,6 +66,7 @@ export default function Routes ({ model }) {
 
   // ruta de login
   router.post('/login', loginController.login)
+  router.post('/logout', loginController.logout)
 
   return router
 }

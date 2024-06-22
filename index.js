@@ -2,6 +2,8 @@ import express from 'express'
 import Routes from './routes/routes.js'
 import { MercurialModel } from './model/model.js'
 import jwt from 'jsonwebtoken'
+import cookieParser from 'cookie-parser'
+process.loadEnvFile()
 
 // Ecmascript
 // CommonJS
@@ -11,12 +13,17 @@ const app = express()
 const port = 8080
 
 app.use(express.json())
+app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
 app.use((req, res, next) => {
-  const cookie = req.cookies.authMercurial
-  try {
-    const data = jwt.verify(cookie, process.env.JWT_PASSWORD)
-    req.user = data
-  } catch (e) {}
+  if (req.cookies.authMercurial) { // Si existe la cookie
+    const cookie = req.cookies.authMercurial // Obtener la cookie
+    req.session = { user: null } // Crear la session, en este caso agregamos un objeto user nulo al objeto session = { session: { user: null}}
+    try {
+      const data = jwt.verify(cookie, process.env.JWT_PASSWORD) // Verificar la cookie con el JWT_PASSWORD
+      req.session.user = data // almacenamos la data (id, email) en la session
+    } catch (e) {}
+  }
+
   next()
 })
 
