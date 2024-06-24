@@ -1,4 +1,7 @@
 import nodemailer from 'nodemailer'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 process.loadEnvFile()
 const smtp = nodemailer.createTransport({
   service: 'gmail',
@@ -11,19 +14,23 @@ const smtp = nodemailer.createTransport({
   }
 })
 
+// Obtener la ruta del archivo actual
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const templatePath = path.join(__dirname, 'template.html')
+let html = fs.readFileSync(templatePath, 'utf8')
+
 export default class EmailService {
   static async sendEmailVerify (input) {
     const { email, id } = input
     try {
+      const url = `https://mercurial-app.vercel.app/users/verify/user/${id}`
+      html = html.replace('{{url}}', url).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para verificar tu cuenta:')
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,
         to: email,
         subject: 'Welcome to Mercurial App, please verify your email',
-        html: `
-        <p>Estimado usuario,</p>
-        <p>Haz clic en el siguiente botón para verificar tu cuenta:</p>
-        <a href="https://mercurial-app.vercel.app/users/reset/password/${id}" class="button"><button>Verificar cuenta</button></a>
-        <p>Equipo de Mercurial</p>`
+        html
       })
       return true
     } catch (e) {
@@ -34,15 +41,14 @@ export default class EmailService {
   static async sendEmailResetPassword (input) {
     const { email, id } = input
     try {
+      const url = `https://mercurial-app.vercel.app/users/reset/password/${id}`
+      html = html.replace('{{url}}', url).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para restablecer tu contraseña:')
+
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,
         to: email,
         subject: 'Reset your password',
-        html: `
-        <p>Estimado usuario,</p>
-        <p>Haz clic en el siguiente botón para restablecer tu contraseña:</p>
-        <a href="https://mercurial-app.vercel.app/users/reset/password/${id}" class="button"><button>Resetear contraseña</button></a>
-        <p>Equipo de Mercurial</p>`
+        html
       })
       return true
     } catch (e) {
@@ -53,14 +59,14 @@ export default class EmailService {
   static async passwordChangeConfirmation (input) {
     const { email } = input
     try {
+      const url = 'https://mercurial-app.vercel.app/'
+      html = html.replace('{{url}}', url).replace('{{text}}', 'Iniciar Sesión').replace('{{body}}', 'Tu contraseña ha sido cambiada exitosamente.')
+
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,
         to: email,
         subject: 'Password changed',
-        html: `
-        <p>Estimado usuario,</p>
-        <p>Tu contraseña ha sido cambiada exitosamente.</p>
-        <p>Equipo de Mercurial</p>`
+        html
       })
       return true
     } catch (e) {

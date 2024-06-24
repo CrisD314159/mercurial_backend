@@ -38,35 +38,35 @@ export default function Routes ({ model }) {
 
   // Metodos de asignaturas
   router.get('/subjects/:id', subjectController.getSubjectById) // obtener una asignatura dado un id
-  router.get('/subjects/user/active', subjectController.getUserSubjects)
-  router.post('/subjects', subjectController.createSubject)
-  router.put('/subjects/:id', subjectController.updateSubject)
-  router.delete('/subjects/:id', subjectController.deleteSubject)
+  router.get('/subjects/user/active', subjectController.getUserSubjects) // obtener las asignaturas de un usuario
+  router.post('/subjects', subjectController.createSubject) // crear una asignatura
+  router.put('/subjects/:id', subjectController.updateSubject) // actualizar una asignatura dado un id
+  router.delete('/subjects/:id', subjectController.deleteSubject) // eliminar una asignatura dado un id
 
   // Métodos de tareas
-  router.get('/taks/:id', taskController.getTaskId)
-  router.get('/tasks/subject/:id', taskController.getTasks)
-  router.get('/tasks/user/active', taskController.getUserTasks)
-  router.get('/tasks/done/user', taskController.getDoneTasks)
-  router.post('/tasks', taskController.createTask)
-  router.put('/tasks/:id', taskController.updateTask)
-  router.delete('/tasks/:id', taskController.deleteTask)
-  router.put('/tasks/mark/done/:id', taskController.markTaskAsDone)
-  router.put('/tasks/roll/back/:id', taskController.rollBackTask)
+  router.get('/taks/:id', taskController.getTaskId) // obtener una tarea dado un id
+  router.get('/tasks/subject/:id', taskController.getTasks) // obtener las tareas de una asignatura
+  router.get('/tasks/user/active', taskController.getUserTasks) // obtener las tareas de un usuario
+  router.get('/tasks/done/user', taskController.getDoneTasks) // obtener las tareas completadas de un usuario
+  router.post('/tasks', taskController.createTask) // crear una tarea
+  router.put('/tasks/:id', taskController.updateTask) // actualizar una tarea dado un id
+  router.delete('/tasks/:id', taskController.deleteTask) // eliminar una tarea dado un id
+  router.put('/tasks/mark/done/:id', taskController.markTaskAsDone) // marcar una tarea como completada
+  router.put('/tasks/roll/back/:id', taskController.rollBackTask) // desmarcar una tarea como completada
 
   // Métodos de tipo
-  router.get('/topics/:id', topicController.getTopicById)
-  router.get('/topics/user/active', topicController.getUsertopics)
-  router.post('/topics', topicController.createTopic)
-  router.put('/topics/:id', topicController.updateTopic)
-  router.delete('/topics/:id', topicController.deleteTopic)
+  router.get('/topics/:id', topicController.getTopicById) // obtener un tipo dado un id
+  router.get('/topics/user/active', topicController.getUsertopics) // obtener los tipos de un usuario
+  router.post('/topics', topicController.createTopic) // crear un tipo
+  router.put('/topics/:id', topicController.updateTopic) // actualizar un tipo dado un id
+  router.delete('/topics/:id', topicController.deleteTopic) // eliminar
 
   // ruta de image
-  router.post('/image/cloudinary', upload.single('image'), imageController.uploadImage)
+  router.post('/image/cloudinary', upload.single('image'), imageController.uploadImage) // subir una imagen a cloudinary
 
   // ruta de login
-  router.post('/login', loginController.login)
-  router.post('/logout', loginController.logout)
+  router.post('/login', loginController.login) // iniciar sesion
+  router.post('/logout', loginController.logout) // cerrar sesion
 
   return router
 }

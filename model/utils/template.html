@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fffefe;
+      color: #6b6b6b;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #777676;
+    }
+    .header img {
+      max-width: 100px;
+    }
+    .content {
+      padding: 20px;
+    }
+    .content p {
+      margin: 10px 0;
+    }
+    .button-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .button {
+      background-color: #e20069;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .button:hover {
+      background-color: #a1004b;
+    }
+    .footer {
+      text-align: center;
+      padding: 10px 0;
+      border-top: 1px solid #777676;
+      font-size: 12px;
+      color: #929292;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://res.cloudinary.com/dw43hgf5p/image/upload/v1719193860/xllkumrdq702etruhxfq.png" alt="Mercurial Logo">
+    </div>
+    <div class="content">
+      <p>Estimado usuario,</p>
+      <p>{{body}}</p>
+      <div class="button-container">
+        <a href="{{url}}" class="button">{{text}}</a>
+      </div>
+      <p>Equipo de Mercurial</p>
+    </div>
+    <div class="footer">
+      <p>&copy; 2024 Mercurial. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</body>
+</html>

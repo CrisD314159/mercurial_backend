@@ -12,6 +12,6 @@ export default class ImageController {
     if (!url) {
       return res.status(440).json({ sucess: false, mesaage: 'error uploading image' })
     }
-    return res.status(200).json({ sucess: true, url })
+    return res.status(201).json({ sucess: true, url })
   }
 }
