@@ -59,6 +59,8 @@ export default class MercurialControllerSubject {
       } else {
         return res.status(440).json({ success: false, message: 'Invalid input' })
       }
+    } else {
+      return res.status(401).json({ success: false, message: 'Unauthorized' })
     }
   }
 
