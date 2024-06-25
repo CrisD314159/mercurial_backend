@@ -17,11 +17,12 @@ app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escri
 app.use((req, res, next) => {
   if (req.cookies.authMercurial) { // Si existe la cookie
     const cookie = req.cookies.authMercurial // Obtener la cookie
-    req.session = { user: null } // Crear la session, en este caso agregamos un objeto user nulo al objeto session = { session: { user: null}}
     try {
       const data = jwt.verify(cookie, process.env.JWT_PASSWORD) // Verificar la cookie con el JWT_PASSWORD
-      req.session.user = data // almacenamos la data (id, email) en la session
-    } catch (e) {}
+      req.session = { user: data } // Crear la session, en este caso agregamos un objeto user nulo al objeto session = { session: { user: null}}
+    } catch (e) {
+      next()
+    }
   }
 
   next()
