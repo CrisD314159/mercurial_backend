@@ -52,7 +52,7 @@ export default class MercurialControllerSubject {
         try {
           const subject = await this.model.createSubject(input, id)
           if (!subject) return res.status(440).json({ success: false, message: 'Impossible to create subject' })
-          return res.status(201).json({ success: true, message: 'Subject created' })
+          return res.status(201).json({ success: true, message: 'Subject created', subject })
         } catch (e) {
           throw new Error(e)
         }

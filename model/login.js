@@ -12,10 +12,11 @@ export class Login {
     }
     const userPassword = user.password
     const userEmail = user.email
+    const userImage = user.image
     const passwordVerify = await bcrypt.compare(password, userPassword)
     if (userEmail === email && passwordVerify) {
       const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_PASSWORD, { expiresIn: '7h' })
-      return token
+      return { token, data: { userEmail, userImage } }
     } else {
       return false
     }

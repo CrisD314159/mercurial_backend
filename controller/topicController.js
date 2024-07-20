@@ -51,7 +51,7 @@ export default class MercurialControllerTopic {
         try {
           const topic = await this.model.createTopic(input, id)
           if (!topic) return res.status(440).json({ success: false, message: 'Impossible to create topic' })
-          return res.status(201).json({ success: true, message: 'Topic created' })
+          return res.status(201).json({ success: true, message: 'Topic created', topic })
         } catch (e) {
           throw new Error(e)
         }

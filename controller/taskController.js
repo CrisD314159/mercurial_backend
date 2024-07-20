@@ -66,7 +66,7 @@ export default class MercurialControllerTask {
         try {
           const task = await this.model.createTask(input, subjectId, topicId)
           if (!task) return res.status(440).json({ success: false, message: 'Impossible to create task' })
-          return res.status(201).json({ success: true, message: 'Task created' })
+          return res.status(201).json({ success: true, message: 'Task created', task })
         } catch (e) {
           throw new Error(e)
         }

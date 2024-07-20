@@ -17,9 +17,9 @@ export default class MercurialControllerLogin {
         try {
           const loginResponse = await this.model.login(input)
           if (!loginResponse) return res.status(440).json({ success: false, message: 'Invalid credentials' })
-          return res.cookie('authMercurial', loginResponse, { httpOnly: true, secure: false, sameSite: 'lax' }).json({ success: true, message: 'Login successfull' })
+          return res.cookie('authMercurial', loginResponse.token, { httpOnly: true, secure: false, sameSite: 'lax' }).json({ success: true, message: 'Login successfull', data: loginResponse.data })
         } catch (e) {
-          throw new Error(e)
+          return res.status(440).json({ success: false, message: 'Expired Token' })
         }
       } else {
         return res.status(440).json({ success: false, message: 'Invalid input' })

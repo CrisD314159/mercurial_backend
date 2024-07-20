@@ -27,7 +27,7 @@ export class Topic {
     try {
       const id = crypto.randomUUID()
       await sql`insert into topic (id, tittle, usuario_id, color, state) values (${id}, ${tittle}, ${userId}, ${color}, ${statesTopic.active})`
-      return true
+      return this.getTopicById(id)
     } catch (error) {
       return false
     }

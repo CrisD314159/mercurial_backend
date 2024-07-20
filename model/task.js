@@ -63,7 +63,7 @@ export class Task {
     try {
       const id = crypto.randomUUID()
       await sql`insert into task (id, tittle, description, state_id, subject_id, topic_id) values (${id}, ${tittle}, ${description}, ${statesTask.active}, ${subjectId}, ${topicId})`
-      return true
+      return this.getTaskById(id)
     } catch (error) {
       return false
     }

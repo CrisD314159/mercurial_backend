@@ -3,6 +3,7 @@ import Routes from './routes/routes.js'
 import { MercurialModel } from './model/model.js'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 process.loadEnvFile()
 
 // Ecmascript
@@ -13,6 +14,11 @@ const app = express()
 const port = 8080
 
 app.use(express.json())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+
+}))
 app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
 app.use((req, res, next) => {
   if (req.cookies.authMercurial) { // Si existe la cookie

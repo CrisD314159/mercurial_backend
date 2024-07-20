@@ -35,7 +35,7 @@ export class Subject {
     try {
       const id = crypto.randomUUID()
       await sql`insert into subject (id, name, state_id, usuario_id, color) values (${id}, ${name}, ${statesSubject.active}, ${userId}, ${color})`
-      return true
+      return this.getSubjectById(id)
     } catch (error) {
       return false
     }
