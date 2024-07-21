@@ -27,7 +27,9 @@ app.use((req, res, next) => {
       const data = jwt.verify(cookie, process.env.JWT_PASSWORD) // Verificar la cookie con el JWT_PASSWORD
       req.session = { user: data } // Crear la session, en este caso agregamos un objeto user nulo al objeto session = { session: { user: null}}
     } catch (e) {
-      next()
+      if (e.name === 'TokenExpiredError') { // Si el error es de tipo TokenExpiredError entoces la cookie expiró, por lo tanto se debe borrar y enviar un mensaje no autorizado
+        return res.clearCookie('authMercurial').status(401).json({ message: 'Token expired. Please log in again.' })// Borrar la cookie
+      }
     }
   }
 

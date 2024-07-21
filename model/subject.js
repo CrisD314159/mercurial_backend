@@ -18,7 +18,7 @@ export class Subject {
       throw new Error('User does not exists')
     }
     const response = await sql`
-    SELECT sub.id, sub.name, sub.color, s.id as state_id, s.name as state_name, u.id as user_id, u.name as user_name, u.image as user_image FROM subject sub
+    SELECT sub.id, sub.name, sub.color, s.id as state_id, s.name as state_name, u.id as user_id, u.name as user_name FROM subject sub
     JOIN state s on sub.state_id = s.id
     JOIN usuario u on sub.usuario_id = u.id
     WHERE u.id = ${id} AND sub.state_id = ${statesSubject.active}`
