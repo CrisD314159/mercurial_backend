@@ -96,7 +96,7 @@ export default class MercurialControllerTopic {
       try {
         const topic = await this.model.deleteTopic(id)
         if (!topic) return res.status(440).json({ success: false, message: 'Impossible to delete topic' })
-        return res.status(204).json({ success: true, message: 'Topic deleted' })
+        return res.status(200).json({ success: true, message: 'Topic deleted' })
       } catch (e) {
         throw new Error(e)
       }

@@ -60,7 +60,7 @@ POST http://localhost:8080/subjects
 Content-Type: application/json
 
 {
-  "name":"Algebra", "color":"#FFFFFF", "userId":"f574f967-311c-4eb7-aee7-eb926a5f013d"
+  "name":"HCI", "color":"#FFFFFF"
 }
 
 
@@ -118,7 +118,7 @@ Content-Type: application/json
 }
 
 ### eliminar una tarea
-DELETE http://localhost:8080/tasks/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+DELETE http://localhost:8080/tasks/70d293ce-1be1-4031-8e21-ce7659b0725b
 
 
 
@@ -149,7 +149,7 @@ Content-Type: application/json
 }
 
 ### eliminar un tipo
-DELETE http://localhost:8080/topics/66f4a0eb-377d-4ce4-a02e-98082c550913
+DELETE http://localhost:8080/topics/01b34836-3a80-49b9-94f9-6d7b6d27dbaa
 
 
 

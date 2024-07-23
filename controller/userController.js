@@ -64,7 +64,7 @@ export class MercurialControllerUser {
         try {
           const user = await this.model.updateUser(id, input)
           if (!user) return res.status(440).json({ suceess: false, message: 'User not found' })
-          return res.status(204).status(440).json({ success: true, message: 'User updated' })
+          return res.status(200).status(440).json({ success: true, message: 'User updated' })
         } catch (e) {
           throw new Error(e)
         }
@@ -84,7 +84,7 @@ export class MercurialControllerUser {
         try {
           const user = await this.model.changePassword(id, input)
           if (!user) return res.status(440).json({ suceess: false, message: 'User not found' })
-          return res.status(204).json({ success: true, message: 'Password changed' })
+          return res.status(200).json({ success: true, message: 'Password changed' })
         } catch (e) {
           throw new Error(e)
         }
@@ -113,7 +113,7 @@ export class MercurialControllerUser {
       try {
         const response = await this.model.deleteUser(id)
         if (!response) return res.status(440).json({ suceess: false, message: 'Impossible to delete user' })
-        return res.status(204).json({ success: true, message: 'User deleted' })
+        return res.status(200).json({ success: true, message: 'User deleted' })
       } catch (e) {
         throw new Error(e)
       }

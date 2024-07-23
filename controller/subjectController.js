@@ -78,7 +78,7 @@ export default class MercurialControllerSubject {
         try {
           const subject = await this.model.updateSubject(id, input)
           if (!subject) return res.status(440).json({ success: false, message: 'Impossible to update subject' })
-          return res.status(204).json({ success: true, message: 'Subject updated' })
+          return res.status(200).json({ success: true, message: 'Subject updated' })
         } catch (e) {
           throw new Error(e)
         }
@@ -95,7 +95,7 @@ export default class MercurialControllerSubject {
       try {
         const subject = await this.model.deleteSubject(id)
         if (!subject) return res.status(440).json({ success: false, message: 'Impossible to delete subject' })
-        return res.status(204).json({ success: true, message: 'Subject deleted' })
+        return res.status(200).json({ success: true, message: 'Subject deleted' })
       } catch (e) {
         throw new Error(e)
       }

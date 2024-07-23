@@ -109,7 +109,7 @@ export default class MercurialControllerTask {
       try {
         const task = await this.model.deleteTask(id)
         if (!task) return res.status(440).json({ success: false, message: 'Impossible to delete task' })
-        return res.status(204).json({ success: true, message: 'Task deleted' })
+        return res.status(200).json({ success: true, message: 'Task deleted' })
       } catch (e) {
         throw new Error(e)
       }
@@ -140,7 +140,7 @@ export default class MercurialControllerTask {
       try {
         const response = await this.model.markTaskAsDone(id)
         if (!response) return res.status(440).json({ success: false, message: 'Task not found' })
-        return res.status(204).json({ success: true, message: 'Task marked as done' })
+        return res.status(200).json({ success: true, message: 'Task marked as done' })
       } catch (error) {
 
       }
@@ -154,7 +154,7 @@ export default class MercurialControllerTask {
       try {
         const response = await this.model.rollBackTask(id)
         if (!response) return res.status(440).json({ success: false, message: 'Task not found' })
-        return res.status(204).json({ success: true, message: 'Task rolled back' })
+        return res.status(200).json({ success: true, message: 'Task rolled back' })
       } catch (error) {
         throw new Error(error)
       }

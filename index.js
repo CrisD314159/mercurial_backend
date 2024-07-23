@@ -28,7 +28,7 @@ app.use((req, res, next) => {
       req.session = { user: data } // Crear la session, en este caso agregamos un objeto user nulo al objeto session = { session: { user: null}}
     } catch (e) {
       if (e.name === 'TokenExpiredError') { // Si el error es de tipo TokenExpiredError entoces la cookie expiró, por lo tanto se debe borrar y enviar un mensaje no autorizado
-        return res.clearCookie('authMercurial').status(401).json({ message: 'Token expired. Please log in again.' })// Borrar la cookie
+        return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Token expired. Please log in again.' })// Borrar la cookie
       }
     }
   }
