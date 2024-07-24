@@ -78,7 +78,7 @@ export default class MercurialControllerTopic {
         try {
           const topic = await this.model.updateTopic(id, input)
           if (!topic) return res.status(440).json({ success: false, message: 'Impossible to update topic' })
-          return res.status(204).json({ success: true, message: 'Topic updated' })
+          return res.status(200).json({ success: true, message: 'Topic updated' })
         } catch (e) {
           throw new Error(e)
         }
