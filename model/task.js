@@ -7,7 +7,7 @@ import { User } from './user.js'
 export class Task {
   static async getTaskById (id) {
     const response = await sql`
-    SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle FROM task t 
+    SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.color as topicColor, top.id as topicId, top.tittle as topicTittle FROM task t 
     JOIN state s on t.state_id = s.id
     JOIN subject sub on t.subject_id = sub.id
     JOIN topic top on t.topic_id = top.id
@@ -30,7 +30,7 @@ export class Task {
       throw new Error('Subject does not exists')
     }
     const response = await sql`
-      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle FROM task t 
+      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.color as topicColor, top.id as topicId, top.tittle as topicTittle FROM task t 
       JOIN state s on t.state_id = s.id
       JOIN subject sub on t.subject_id = sub.id
       JOIN topic top on t.topic_id = top.id
@@ -45,7 +45,7 @@ export class Task {
       throw new Error('User does not exists')
     }
     const response = await sql`
-      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle  FROM task t 
+      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.color as topicColor, top.id as topicId, top.tittle as topicTittle  FROM task t 
       JOIN state s on t.state_id = s.id
       JOIN subject sub on t.subject_id = sub.id
       JOIN topic top on t.topic_id = top.id
@@ -111,7 +111,7 @@ export class Task {
       throw new Error('User does not exists')
     }
     const response = await sql`
-      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.id as topicId, top.tittle as topicTittle  FROM task t 
+      SELECT t.id, t.tittle, t.description, s.id as stateId, s.name as stateName, sub.id as subjectId, sub.name as subjectName, top.color as topicColor, top.id as topicId, top.tittle as topicTittle  FROM task t 
       JOIN state s on t.state_id = s.id
       JOIN subject sub on t.subject_id = sub.id
       JOIN topic top on t.topic_id = top.id
