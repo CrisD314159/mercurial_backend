@@ -69,6 +69,8 @@ export class MercurialControllerUser {
         } catch (e) {
           throw new Error(e)
         }
+      } else {
+        return res.status(440).json({ suceess: false, message: 'Invalid input' })
       }
     }
   }
@@ -89,6 +91,8 @@ export class MercurialControllerUser {
         } catch (e) {
           throw new Error(e)
         }
+      } else {
+        return res.status(440).json({ suceess: false, message: 'Invalid input' })
       }
     }
   }

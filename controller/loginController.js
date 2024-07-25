@@ -22,7 +22,7 @@ export default class MercurialControllerLogin {
           return res.status(440).json({ success: false, message: 'Expired Token' })
         }
       } else {
-        return res.status(440).json({ success: false, message: 'Invalid input' })
+        return res.status(440).json({ success: false, message: 'Invalid credentials' })
       }
     }
   }

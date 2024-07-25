@@ -25,7 +25,7 @@ PUT http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "name":"Juan Emilio Molano", "email":"juansito@gmail.com", "username":"juanMasterKiller", "password":"1234567890"
+  "name":"Ryan", "username":"ryena456"
 }
 
 ### verificar cuenta usuario
@@ -161,7 +161,7 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "vargasloaizacristian@gmail.com", "password": "1234567890"
+  "email": "vargasloaizacristian@gmail.com", "password": "0987654321"
 }
 
 ### logout
