@@ -2,8 +2,7 @@
 ### Test de usuarios
 
 ### get de usuarios 
-GET http://localhost:8080/users/100546
-
+GET http://localhost:8080/users
 
 ### post de usuarios
 POST http://localhost:8080/users
@@ -22,7 +21,7 @@ Content-Type: application/json
 }
 
 ### put de usuarios 
-PUT http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
+PUT http://localhost:8080/users
 Content-Type: application/json
 
 {
@@ -33,7 +32,7 @@ Content-Type: application/json
 PUT http://localhost:8080/users/account/verify/f574f967-311c-4eb7-aee7-eb926a5f013d
 
 ### delete de usuarios
-DELETE  http://localhost:8080/users/8475dd28-ae03-40e1-b6e5-fe85f0f0b650
+DELETE  http://localhost:8080/users
 
 
 
@@ -65,11 +64,11 @@ Content-Type: application/json
 
 
 ### modificar una asignatura
-PUT http://localhost:8080/subjects/68701f50-52af-4d4c-a058-a507124f8287
+PUT http://localhost:8080/subjects/0fab415f-9265-4063-880a-c85690e8c6e9
 Content-Type: application/json
 
 {
-  "name":"Matematicas", "color":"#000000"
+  "name":"Admin de TI", "color":"#000000"
 }
 
 ### eliminar una asignatura
@@ -102,11 +101,11 @@ GET http://localhost:8080/tasks/done/user
 
 
 ### Actualizar una tarea
-PUT http://localhost:8080/tasks/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+PUT http://localhost:8080/tasks/33dd0b3d-eb3e-48f2-827c-ccae8ff2b60c
 Content-Type: application/json
 
 {
-  "tittle": "Estudiar para el parcial", "description": "Estudiar para el parcial de algebra"
+  "tittle": "Estudiar parcial", "description": "Estudiar para el parcial de algebra"
 }
 
 ### crear una tarea

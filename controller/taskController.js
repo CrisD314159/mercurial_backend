@@ -91,7 +91,7 @@ export default class MercurialControllerTask {
         try {
           const task = await this.model.updateTask(id, input)
           if (!task) return res.status(440).json({ success: false, message: 'Impossible to update task' })
-          return res.status(204).json({ success: true, message: 'Task updated' })
+          return res.status(200).json({ success: true, message: 'Task updated' })
         } catch (e) {
           throw new Error(e)
         }

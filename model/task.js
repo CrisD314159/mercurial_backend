@@ -39,6 +39,30 @@ export class Task {
     return response
   } // falta agregar método filtrar por tipo
 
+  static async getTasksBySubject (id) {
+    const exists = await Subject.getSubjectById(id)
+    if (!exists) {
+      throw new Error('Subject does not exists')
+    }
+    const response = await sql`
+      SELECT t.id, t.tittle FROM task t 
+      WHERE t.subject_id = ${id} AND t.state_id = ${statesTask.active};`
+    if (!response[0]) return false
+    return response
+  }
+
+  static async getTasksByTopic (id) {
+    const exists = await Topic.getTopicById(id)
+    if (!exists) {
+      throw new Error('Subject does not exists')
+    }
+    const response = await sql`
+      SELECT t.id, t.tittle FROM task t 
+      WHERE t.topic_id = ${id} AND t.state_id = ${statesTask.active};`
+    if (!response[0]) return false
+    return response
+  }
+
   static async getUserTasks (id) {
     const exists = await User.getUser(id)
     if (!exists) {

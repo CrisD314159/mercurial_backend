@@ -8,7 +8,8 @@ export class MercurialControllerUser {
 
   // Obtener un usuario dado un id
   getUser = async (req, res) => {
-    const { id } = req.params
+    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
+    const { id } = req.session.user
     if (id) {
       try {
         const user = await this.model.getUser(id)
@@ -108,8 +109,8 @@ export class MercurialControllerUser {
   // Eliminar un usuario dado un id
   deleteUser = async (req, res) => {
     if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
-    if (req.params.id) {
-      const { id } = req.params
+    if (req.session) {
+      const { id } = req.session.user
       try {
         const response = await this.model.deleteUser(id)
         if (!response) return res.status(440).json({ suceess: false, message: 'Impossible to delete user' })

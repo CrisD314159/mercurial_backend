@@ -1,3 +1,4 @@
+import { Task } from './task.js'
 import { User } from './user.js'
 import { sql } from './utils/bdConnection.js'
 import { statesTopic } from './utils/states.js'
@@ -57,8 +58,12 @@ export class Topic {
 
   static async deleteTopic (id) {
     const active = await this.getTopicById(id)
+    const tasks = await Task.getTasksByTopic(id)
     if (!active) {
       throw new Error('Topic does not exists')
+    }
+    if (tasks) {
+      throw new Error('Topic has pending tasks')
     }
     try {
       await sql`update topic set state = ${statesTopic.deleted} where id = ${id}`
