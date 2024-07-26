@@ -142,15 +142,20 @@ export class User {
     }
   }
 
-  static async changePassword (id, input) {
-    const { email, password } = input
-    const exists = await this.getUser(id)
-    if (!exists) {
-      throw new Error('User does not exists')
+  static async changePassword (input) {
+    const { token, email, password } = input
+    const user = await this.getPasswordToken(token, email)
+    if (!user) {
+      throw new Error('Token does not exists')
     }
     try {
       const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
-      await sql`update usuario set password = ${hashedPassword} where id = ${id} and email = ${email}`
+      const querieResponse = sql.begin(async sql => {
+        await sql`update usuario set password = ${hashedPassword} where id = ${user.user_id} and email = ${user.user_email}`
+        await sql`delete from passwordToken where id = ${token}`
+        return true
+      })
+      if (!querieResponse) throw new Error('Error updating password')
       await EmailService.passwordChangeConfirmation({ email })
       return true
     } catch (e) {
@@ -158,18 +163,42 @@ export class User {
     }
   }
 
-  static async sendEmailChangePassword (input) {
-    const { email } = input
-    const exists = await this.getUserByEmailUsername(null, email)
-    if (!exists) {
+  static async getPasswordResetToken (token) {
+    const result = await sql`select * from passwordToken where id = ${token}`
+    if (result[0]) return result[0]
+
+    return false
+  }
+
+  static async getPasswordToken (token, email) {
+    const result = await sql`select * from passwordToken where id = ${token} and user_email = ${email}`
+    if (result[0]) return result[0]
+
+    return false
+  }
+
+  static async sendEmailChangePassword (email) {
+    const user = await this.getUserByEmail(email)
+    if (!user) {
       throw new Error('User does not exists')
     }
     try {
-      const user = await EmailService.sendEmailResetPassword({ email })
-      return user
+      const token = await this.generatePasswordToken(user.id, user.email)
+      if (!token) throw new Error('Error generating token')
+      const emailResponse = await EmailService.sendEmailResetPassword({ email, token })
+      return emailResponse
     } catch (e) {
       return false
     }
+  }
+
+  static async generatePasswordToken (id, email) {
+    const token = crypto.randomUUID()
+    if (id && email) {
+      await sql`insert into passwordToken (id, user_id, user_email) values (${token}, ${id}, ${email})`
+      return token
+    }
+    return false
   }
 
   // este metodo los usaremos mas adelante para verificar un usuario una vez presione el link de verificación que le llega al correo

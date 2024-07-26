@@ -8,6 +8,12 @@ const user = z.object({ // objeto de tipo zod
   image: z.string().url().optional()
 
 })
+const passwordChange = z.object({ // objeto de tipo zod
+  token: z.string().min(10),
+  email: z.string().email(),
+  password: z.string().min(8).max(16).optional()
+
+})
 
 // Verifica que el objeto cumpla en su TOTALIDAD con las reglas establecidas en el objeto verifyUser
 export function verifyUser (object) {
@@ -18,4 +24,8 @@ export function verifyUser (object) {
 // Es decir, puede faltar por ejemplo email, pero si cumple con las demas reglas, se considera valido
 export function verifyUserPartial (object) {
   return user.partial().safeParse(object)
+}
+
+export function verifyUserPasswordChange (object) {
+  return passwordChange.safeParse(object)
 }

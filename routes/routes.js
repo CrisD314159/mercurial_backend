@@ -33,6 +33,7 @@ export default function Routes ({ model }) {
   router.put('/users', userController.updateUser) // actualizar un usuario dado un id
   router.delete('/users', userController.deleteUser) // eliminar un usuario dado un id
   router.put('/users/password/change', userController.changePassword) // cambiar la contraseña de un usuario
+  router.get('/users/password/change/:token', userController.getEmailChangeToken) // cambiar la contraseña de un usuario
   router.post('/users/password/change/email', userController.sendEmailChangePassword) // enviar un correo para cambiar la contraseña
   router.put('/users/account/verify/:id', userController.verifyUser) // verificar un usuario dado un id
 

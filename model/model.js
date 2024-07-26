@@ -37,6 +37,11 @@ export class MercurialModel {
     return response
   }
 
+  static async getPasswordResetToken (token) {
+    const response = await User.getPasswordResetToken(token)
+    return response
+  }
+
   static async uploadImage (image) {
     const response = await ImageCloudinary.uploadImage(image)
     return response

@@ -39,9 +39,9 @@ export default class EmailService {
   }
 
   static async sendEmailResetPassword (input) {
-    const { email, id } = input
+    const { email, token } = input
     try {
-      const url = `https://mercurial-app.vercel.app/users/reset/password/${id}`
+      const url = `https://mercurial-app.vercel.app/users/reset/password/${token}`
       html = html.replace('{{url}}', url).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para restablecer tu contraseña:')
 
       await smtp.sendMail({

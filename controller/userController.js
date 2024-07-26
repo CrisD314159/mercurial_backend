@@ -1,4 +1,4 @@
-import { verifyUser, verifyUserPartial } from './validations/userValidations.js'
+import { verifyUser, verifyUserPartial, verifyUserPasswordChange } from './validations/userValidations.js'
 export class MercurialControllerUser {
   constructor ({ model }) {
     this.model = model
@@ -8,7 +8,7 @@ export class MercurialControllerUser {
 
   // Obtener un usuario dado un id
   getUser = async (req, res) => {
-    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
+    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     const { id } = req.session.user
     if (id) {
       try {
@@ -50,7 +50,7 @@ export class MercurialControllerUser {
 
   // Actualizar un usuario dado un id
   updateUser = async (req, res) => {
-    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
+    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.body) {
       const { id } = req.session.user
       const { name, username, password, image } = req.body
@@ -77,15 +77,16 @@ export class MercurialControllerUser {
 
   changePassword = async (req, res) => {
     if (req.body) {
-      const { id, email, password } = req.body
+      const { token, email, password } = req.body
       const input = {
+        token,
         email,
         password
       }
-      const response = verifyUserPartial(input)
+      const response = verifyUserPasswordChange(input)
       if (response.success) {
         try {
-          const user = await this.model.changePassword(id, input)
+          const user = await this.model.changePassword(input)
           if (!user) return res.status(440).json({ suceess: false, message: 'User not found' })
           return res.status(200).json({ success: true, message: 'Password changed' })
         } catch (e) {
@@ -94,6 +95,21 @@ export class MercurialControllerUser {
       } else {
         return res.status(440).json({ suceess: false, message: 'Invalid input' })
       }
+    }
+  }
+
+  getEmailChangeToken = async (req, res) => {
+    if (req.params.token) {
+      const { token } = req.params
+      try {
+        const response = await this.model.getPasswordResetToken(token)
+        if (!response) return res.status(440).json({ suceess: false, message: 'Impossible to get token' })
+        return res.json({ success: true, message: 'Token sent', response })
+      } catch (e) {
+        throw new Error(e)
+      }
+    } else {
+      return res.status(440).json({ suceess: false, message: 'Invalid input' })
     }
   }
 
@@ -107,12 +123,14 @@ export class MercurialControllerUser {
       } catch (e) {
         throw new Error(e)
       }
+    } else {
+      return res.status(440).json({ suceess: false, message: 'Invalid input' })
     }
   }
 
   // Eliminar un usuario dado un id
   deleteUser = async (req, res) => {
-    if (!req.session) return res.status(401).json({ success: false, message: 'Unauthorized' })
+    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { id } = req.session.user
       try {
