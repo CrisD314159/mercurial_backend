@@ -22,9 +22,9 @@ let html = fs.readFileSync(templatePath, 'utf8')
 
 export default class EmailService {
   static async sendEmailVerify (input) {
-    const { email, id } = input
+    const { email, verificationToken } = input
     try {
-      const url = `https://mercurial-app.vercel.app/users/verify/user/${id}`
+      const url = `https://mercurial-app.vercel.app/users/verify/user/${verificationToken}`
       html = html.replace('{{url}}', url).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para verificar tu cuenta:')
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,

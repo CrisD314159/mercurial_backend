@@ -3,6 +3,7 @@ import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 import { statesUser } from './utils/states.js'
 import EmailService from './utils/emailService.js'
+
 export class User {
   static async getUser (id) {
     const result = await sql`select id, name, email, username, image from usuario where id = ${id} and state = ${statesUser.active}`
@@ -21,7 +22,7 @@ export class User {
   }
 
   static async getUserNotVerified (id) {
-    const result = await sql`select * from usuario where id = ${id} and state = ${statesUser.unverified}`
+    const result = await sql`select * from verificationToken where id = ${id} and state = ${statesUser.unverified}`
     if (!result[0]) return false
     if (result[0].state === statesUser.active) throw new Error('Your account is already verified')
 
@@ -71,7 +72,8 @@ export class User {
         } else {
           await sql`insert into usuario (id, name, email, username, password, state) values (${id}, ${name}, ${email}, ${username}, ${hashedPassword}, ${statesUser.unverified} )`
         }
-        await EmailService.sendEmailVerify({ email, id })
+        const verificationToken = await this.generateVerificationToken(id)
+        await EmailService.sendEmailVerify({ email, verificationToken })
         // if (!emailResponse) throw new Error('Error sending email')
         return true
       } catch (e) {
@@ -79,6 +81,14 @@ export class User {
       }
     } else {
       throw new Error('User already exists')
+    }
+  }
+
+  static async generateVerificationToken (id) {
+    const token = crypto.randomUUID()
+    if (id) {
+      await sql`insert into verificationToken (id, user_id) values (${token}, ${id})`
+      return token
     }
   }
 
@@ -164,13 +174,17 @@ export class User {
 
   // este metodo los usaremos mas adelante para verificar un usuario una vez presione el link de verificación que le llega al correo
   static async verifyUser (id) {
-    const exists = await this.getUserNotVerified(id)
-    if (!exists) {
+    const user = await this.getUserNotVerified(id)
+    if (!user) {
       throw new Error('User does not exists')
     }
     try {
-      await sql`update usuario set state = ${statesUser.active} where id = ${id}`
-      return true
+      const query = await sql.begin(async sql => {
+        await sql`update usuario set state = ${statesUser.active} where id = ${user.user_id}`
+        await sql`update verificationToken set state = ${statesUser.active} where id = ${id}`
+        return true
+      })
+      return query
     } catch (e) {
       return false
     }

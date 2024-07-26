@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ### verificar cuenta usuario
-PUT http://localhost:8080/users/account/verify/f574f967-311c-4eb7-aee7-eb926a5f013d
+PUT http://localhost:8080/users/account/verify/efdc7c31-6a37-4f97-b973-df3bc86bcbbf
 
 ### delete de usuarios
 DELETE  http://localhost:8080/users
