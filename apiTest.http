@@ -129,7 +129,7 @@ DELETE http://localhost:8080/tasks/70d293ce-1be1-4031-8e21-ce7659b0725b
 
 
 ### Obtener tipos de usuario
-GET http://localhost:8080/topics/user/active
+GET https://stupid-galina-mercurial-80e3a007.koyeb.app/topics/user/active
 
 ### crear tipo
 POST http://localhost:8080/topics

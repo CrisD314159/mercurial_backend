@@ -16,11 +16,13 @@ const port = process.env.PORT ?? 8000
 
 app.use(express.json())
 app.use(cors({
-  origin: (origin, callback) => {
-    callback(null, true) // Permitir cualquier origen
-  },
+  origin: 'http://localhost:5173',
   credentials: true
 
+},
+{
+  origin: 'https://mercurial-app.vercel.app',
+  credentials: true
 }
 ))
 app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
