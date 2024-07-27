@@ -1,5 +1,6 @@
 import postgres from 'postgres'
-process.loadEnvFile() // con esto cargamos las variables de entorno sin necesidad de usar dotenv
+// process.loadEnvFile() // con esto cargamos las variables de entorno sin necesidad de usar dotenv
+import 'dotenv/config'
 
 // const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env
 

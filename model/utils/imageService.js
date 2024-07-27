@@ -1,7 +1,7 @@
 // Aqui pondremos el servicio de imagenes de cloudinary
 // Este servicio se encargara de subir imagenes a cloudinary y de obtener la url de la imagen para subirlo a la base de datos
 import { v2 as cloudinary } from 'cloudinary'
-process.loadEnvFile() // con esto cargamos las variables de entorno sin necesidad de usar dotenv
+import 'dotenv/config'
 cloudinary.config({
   cloud_name: 'dyig9g14u',
   api_key: '147298787567336',

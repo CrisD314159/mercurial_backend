@@ -4,7 +4,8 @@ import { MercurialModel } from './model/model.js'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-process.loadEnvFile()
+// process.loadEnvFile()
+import 'dotenv/config'
 
 // Ecmascript
 // CommonJS

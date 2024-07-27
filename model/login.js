@@ -1,7 +1,7 @@
 import { User } from './user.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-process.loadEnvFile()
+import 'dotenv/config'
 
 export class Login {
   static async login (input) {

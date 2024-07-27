@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-process.loadEnvFile()
+import 'dotenv/config'
 const smtp = nodemailer.createTransport({
   service: 'gmail',
   port: 465,
