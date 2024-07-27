@@ -52,7 +52,7 @@ GET http://localhost:8080/subjects/777
 
 ###obtener las asignaturas de un usuario
 ## no es necesario enviar el id del usuario, ya que se toma el id del usuario desde la cookie
-GET http://localhost:8080/subjects/user/active
+GET https://stupid-galina-mercurial-80e3a007.koyeb.app/subjects/user/active
 
 ### crear una asignatura
 POST http://localhost:8080/subjects
@@ -88,7 +88,7 @@ GET http://localhost:8080/tasks/subject/15e560f2-3b36-4edd-ad6a-7b7dc22e50d2
 
 ### obtener tareas de un usuario
 ## no es necesario enviar el id del usuario, ya que se toma el id del usuario desde la cookie
-GET http://localhost:8080/tasks/user/active
+GET https://stupid-galina-mercurial-80e3a007.koyeb.app/tasks/user/active
 
 ### Marcar una tarea como completada
 PUT http://localhost:8080/tasks/mark/done/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
@@ -157,7 +157,7 @@ DELETE http://localhost:8080/topics/01b34836-3a80-49b9-94f9-6d7b6d27dbaa
 
 
 ### login
-POST http://localhost:8080/login
+POST https://stupid-galina-mercurial-80e3a007.koyeb.app/login
 Content-Type: application/json
 
 {
@@ -165,7 +165,7 @@ Content-Type: application/json
 }
 
 ### logout
-POST http://localhost:8080/logout
+POST https://stupid-galina-mercurial-80e3a007.koyeb.app/logout
 
 
 

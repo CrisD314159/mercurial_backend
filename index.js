@@ -19,7 +19,12 @@ app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 
-}))
+},
+{
+  origin: 'https://mercurial-app.vercel.app/',
+  credentials: true
+}
+))
 app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
 app.use((req, res, next) => {
   if (req.cookies.authMercurial) { // Si existe la cookie
