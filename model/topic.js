@@ -41,7 +41,7 @@ export class Topic {
       throw new Error('Topic does not exists')
     }
     try {
-      const response = sql.begin(async sql => {
+      const response = await sql.begin(async sql => {
         if (tittle) {
           await sql`update topic set tittle = ${tittle} where id = ${id}`
         }

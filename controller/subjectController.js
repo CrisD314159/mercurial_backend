@@ -9,7 +9,7 @@ export default class MercurialControllerSubject {
 
   // Obtener una asignatura dado un id
   getSubjectById = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -24,7 +24,7 @@ export default class MercurialControllerSubject {
 
   // Obtener las asignaturas de un usuario
   getUserSubjects = async (req, res) => {
-    if (req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { id } = req.session.user // en este caso, es mejor extraer el id del usuario de la sesion
       try {
@@ -41,7 +41,7 @@ export default class MercurialControllerSubject {
 
   // Crear una asignatura
   createSubject = async (req, res) => {
-    if (req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { name, color } = req.body
       const { id } = req.session.user
@@ -67,7 +67,7 @@ export default class MercurialControllerSubject {
   }
 
   updateSubject = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.body && req.params.id) {
       const { id } = req.params
       const { name, color } = req.body
@@ -91,7 +91,7 @@ export default class MercurialControllerSubject {
   }
 
   deleteSubject = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {

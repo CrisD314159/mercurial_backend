@@ -150,7 +150,7 @@ export class User {
     }
     try {
       const hashedPassword = await bcrypt.hash(password, 10) // hasheamos la contraseña mediante bcrypt, esto permite que la contraseña no se almacene en texto plano
-      const querieResponse = sql.begin(async sql => {
+      const querieResponse = await sql.begin(async sql => {
         await sql`update usuario set password = ${hashedPassword} where id = ${user.user_id} and email = ${user.user_email}`
         await sql`delete from passwordToken where id = ${token}`
         return true
