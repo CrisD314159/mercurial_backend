@@ -100,7 +100,7 @@ export class Task {
       throw new Error('Task does not exists')
     }
     try {
-      const response = sql.begin(async sql => {
+      const response = await sql.begin(async sql => {
         if (tittle) {
           await sql`update task set tittle = ${tittle} where id = ${id}`
         }

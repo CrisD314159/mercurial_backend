@@ -18,14 +18,13 @@ const smtp = nodemailer.createTransport({
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const templatePath = path.join(__dirname, 'template.html')
-let html = fs.readFileSync(templatePath, 'utf8')
 
 export default class EmailService {
   static async sendEmailVerify (input) {
     const { email, verificationToken } = input
     try {
-      const url = `https://mercurial-app.vercel.app/users/verify/user/${verificationToken}`
-      html = html.replace('{{url}}', url).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para verificar tu cuenta:')
+      let html = fs.readFileSync(templatePath, 'utf8')
+      html = html.replace('{{url}}', `https://mercurial-app.vercel.app/users/verify/user/${verificationToken}`).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para verificar tu cuenta:')
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,
         to: email,
@@ -41,8 +40,8 @@ export default class EmailService {
   static async sendEmailResetPassword (input) {
     const { email, token } = input
     try {
-      const url = `https://mercurial-app.vercel.app/users/reset/password/${token}`
-      html = html.replace('{{url}}', url).replace('{{text}}', 'Verificar cuenta').replace('{{body}}', 'Haz clic en el siguiente botón para restablecer tu contraseña:')
+      let html = fs.readFileSync(templatePath, 'utf8')
+      html = html.replace('{{url}}', `https://mercurial-app.vercel.app/users/reset/password/${token}`).replace('{{text}}', 'Restablecer Contraseña').replace('{{body}}', 'Haz clic en el siguiente botón para restablecer tu contraseña:')
 
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,
@@ -59,9 +58,9 @@ export default class EmailService {
   static async passwordChangeConfirmation (input) {
     const { email } = input
     try {
+      let html = fs.readFileSync(templatePath, 'utf8')
       const url = 'https://mercurial-app.vercel.app/'
       html = html.replace('{{url}}', url).replace('{{text}}', 'Iniciar Sesión').replace('{{body}}', 'Tu contraseña ha sido cambiada exitosamente.')
-
       await smtp.sendMail({
         from: `Mercurial Team <${process.env.EMAIL}>`,
         to: email,

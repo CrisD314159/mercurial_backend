@@ -8,7 +8,7 @@ export default class MercurialControllerTopic {
   // Metodos de tipo
 
   getTopicById = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -23,7 +23,7 @@ export default class MercurialControllerTopic {
 
   // Obtener las tareas de una asignatura
   getUsertopics = async (req, res) => {
-    if (req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { id } = req.session.user
       try {
@@ -40,7 +40,7 @@ export default class MercurialControllerTopic {
 
   // Crear una tarea
   createTopic = async (req, res) => {
-    if (req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { tittle, color } = req.body
       const { id } = req.session.user
@@ -67,7 +67,7 @@ export default class MercurialControllerTopic {
 
   // Actualizar una tarea
   updateTopic = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.body && req.params.id) {
       const { id } = req.params
       const { tittle, color } = req.body
@@ -92,7 +92,7 @@ export default class MercurialControllerTopic {
 
   // Eliminar una tarea
   deleteTopic = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.clearCookie('authMercurial').status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
+    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {

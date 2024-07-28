@@ -49,7 +49,7 @@ export class Subject {
       throw new Error('Subject does not exists')
     }
     try {
-      const response = sql.begin(async sql => {
+      const response = await sql.begin(async sql => {
         if (name) {
           await sql`update subject set name = ${name} where id = ${id}`
         }
