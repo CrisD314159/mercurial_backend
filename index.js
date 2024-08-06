@@ -27,9 +27,15 @@ app.use(express.json())
 //   credentials: true
 // }))
 
+const whitelist = ['https://mercurial-app.vercel.app']
 const corsOptions = {
-  origin: 'https://mercurial-app.vercel.app', // Reemplaza con el dominio permitido
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }
 
