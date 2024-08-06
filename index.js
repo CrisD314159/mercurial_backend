@@ -27,7 +27,13 @@ app.use(express.json())
 //   credentials: true
 // }))
 
-app.use(cors())
+const corsOptions = {
+  origin: 'https://mercurial-app.vercel.app', // Reemplaza con el dominio permitido
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+}
+
+app.use(cors(corsOptions))
 app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
 
 // app.use((req, res, next) => {
