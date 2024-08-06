@@ -40,6 +40,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
 
 // app.use((req, res, next) => {
