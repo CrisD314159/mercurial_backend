@@ -15,17 +15,19 @@ const app = express()
 const port = process.env.PORT ?? 8000
 
 app.use(express.json())
-app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = ['http://localhost:5173', 'https://mercurial-app.vercel.app']
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  credentials: true
-}))
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     const allowedOrigins = ['http://localhost:5173', 'https://mercurial-app.vercel.app']
+//     if (allowedOrigins.includes(origin) || !origin) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   },
+//   credentials: true
+// }))
+
+app.use(cors())
 app.use(cookieParser()) // Middleware para cookies, permite cargar, leer y escribir cookies
 
 // app.use((req, res, next) => {
