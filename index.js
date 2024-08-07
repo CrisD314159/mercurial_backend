@@ -27,7 +27,7 @@ app.use(express.json())
 //   credentials: true
 // }))
 
-const whitelist = ['https://mercurial-app.vercel.app']
+const whitelist = ['https://mercurial-app.vercel.app', 'http://localhost:5173']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
