@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const subject = z.object({
 
-  title: z.string().min(3).max(15),
+  title: z.string().min(3).max(20),
   color: z.string().min(4)
 
 })
