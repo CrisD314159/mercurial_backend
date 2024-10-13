@@ -3,8 +3,8 @@
 import { v2 as cloudinary } from 'cloudinary'
 import 'dotenv/config'
 cloudinary.config({
-  cloud_name: 'dyig9g14u',
-  api_key: '147298787567336',
+  cloud_name: 'dw43hgf5p',
+  api_key: '931953722983393',
   api_secret: process.env.API_KEY
 })
 

@@ -20,7 +20,7 @@ export default class MercurialControllerLogin {
           // return res.cookie('authMercurial', loginResponse.token, { httpOnly: true, secure: true, sameSite: 'none' }).json({ success: true, message: 'Login successfull', data: loginResponse.data })
           return res.json({ success: true, message: 'Login successfull', data: loginResponse.data, token: loginResponse.token })
         } catch (e) {
-          return res.status(440).json({ success: false, message: 'Expired Token' })
+          return res.status(440).json({ success: false, message: 'Invalid credentials' })
         }
       } else {
         return res.status(440).json({ success: false, message: 'Invalid credentials' })
