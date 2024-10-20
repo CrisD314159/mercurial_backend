@@ -46,7 +46,6 @@ export async function clearRefreshToken (refreshToken) {
 
 export const refreshToken = async (req, res) => {
   const { user } = req.session
-  console.log(user)
   try {
     if (!user) {
       return res.status(401).json({ message: 'Unauthorized' })
