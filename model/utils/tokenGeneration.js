@@ -5,7 +5,7 @@ import { createSession, deleteSession } from './tokenQueries.js'
 export function generateAccessToken (user) {
   try {
     if (user) {
-      const accessToken = jwt.sign({ user }, process.env.JWT_PASSWORD, { expiresIn: '30m' })
+      const accessToken = jwt.sign({ user }, process.env.JWT_PASSWORD, { expiresIn: '7h' })
       return accessToken
     }
   } catch (error) {
