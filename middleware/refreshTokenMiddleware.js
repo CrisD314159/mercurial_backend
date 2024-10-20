@@ -15,6 +15,8 @@ export const checkRefresh = async (req, res, next) => {
     return res.status(401).json({ message: 'Unauthorized' })
   }
   const validFingerprint = await bcryptjs.compare(`${ip}${userAgent}`, valid.fingerprint)
+  console.log(validFingerprint)
+  console.log(valid)
 
   if (!refreshToken || !valid || !validFingerprint) {
     return res.status(401).json({ message: 'Unauthorized' })
