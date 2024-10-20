@@ -1,6 +1,6 @@
 import { sql } from './utils/bdConnection.js'
 import crypto from 'crypto'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { statesUser } from './utils/states.js'
 import EmailService from './utils/emailService.js'
 

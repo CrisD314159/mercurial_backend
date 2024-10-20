@@ -88,16 +88,22 @@ GET http://localhost:8080/tasks/subject/15e560f2-3b36-4edd-ad6a-7b7dc22e50d2
 
 ### obtener tareas de un usuario
 ## no es necesario enviar el id del usuario, ya que se toma el id del usuario desde la cookie
-GET https://stupid-galina-mercurial-80e3a007.koyeb.app/tasks/user/active
+GET http://localhost:8000/tasks/user/active
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMwNjE1LCJleHAiOjE3Mjg4MzI0MTV9.5kuChv0wb9UtPsXUXpRq8aq7NC3YbTD49_wRoFSA0Eo
 
 ### Marcar una tarea como completada
-PUT http://localhost:8080/tasks/mark/done/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+PUT http://localhost:8000/tasks/mark/done/39d664dd-7f12-4c80-b9d5-8c007f6544cf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMwNjE1LCJleHAiOjE3Mjg4MzI0MTV9.5kuChv0wb9UtPsXUXpRq8aq7NC3YbTD49_wRoFSA0Eo
+
 
 ### Marcar una tarea como activa otra vez (rollback)
-PUT http://localhost:8080/tasks/roll/back/6f858f0f-2674-49de-bcd9-8a02e28ab9bd
+PUT http://localhost:8000/tasks/roll/back/39d664dd-7f12-4c80-b9d5-8c007f6544cf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMwNjE1LCJleHAiOjE3Mjg4MzI0MTV9.5kuChv0wb9UtPsXUXpRq8aq7NC3YbTD49_wRoFSA0Eo
+
 
 ### obtener las tareas completadas
-GET http://localhost:8080/tasks/done/user
+GET http://localhost:8000/tasks/done/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMwNjE1LCJleHAiOjE3Mjg4MzI0MTV9.5kuChv0wb9UtPsXUXpRq8aq7NC3YbTD49_wRoFSA0Eo
 
 
 ### Actualizar una tarea
@@ -109,11 +115,12 @@ Content-Type: application/json
 }
 
 ### crear una tarea
-POST http://localhost:8080/tasks
+POST http://localhost:8000/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMwNjE1LCJleHAiOjE3Mjg4MzI0MTV9.5kuChv0wb9UtPsXUXpRq8aq7NC3YbTD49_wRoFSA0Eo
 Content-Type: application/json
 
 {
-  "tittle": "Estudiar gauss jordan", "description": "Hacer algunos ejercicios", "subjectId": "15e560f2-3b36-4edd-ad6a-7b7dc22e50d2", "topicId": "0127aada-f597-440f-9a02-0b9a7640db62"
+  "tittle": "Estudiar micro", "description": "Empezar por NestJS", "subjectId": "15e560f2-3b36-4edd-ad6a-7b7dc22e50d2", "topicId": "0127aada-f597-440f-9a02-0b9a7640db62"
 }
 
 ### eliminar una tarea
@@ -129,10 +136,12 @@ DELETE http://localhost:8080/tasks/70d293ce-1be1-4031-8e21-ce7659b0725b
 
 
 ### Obtener tipos de usuario
-GET https://stupid-galina-mercurial-80e3a007.koyeb.app/topics/user/active
+GET http://localhost:8000/topics/user/active
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMxNDc5LCJleHAiOjE3Mjg4MzMyNzl9.ruvxgI6yfRJhXFoEZy64VYg6nh8G40Z7yWF606vUQk4
 
 ### crear tipo
-POST http://localhost:8080/topics
+POST http://localhost:8000/topics
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODI3NjI5LCJleHAiOjE3Mjg4Mjk0Mjl9.KAhyZwH8jefqrTBN0-DVtMonx7cdB0LUwE3CViYQBQY
 Content-Type: application/json
 
 {
@@ -140,7 +149,8 @@ Content-Type: application/json
 }
 
 ### actualizar tipo
-PUT http://localhost:8080/topics/66f4a0eb-377d-4ce4-a02e-98082c550913
+PUT http://localhost:8000/topics/66f4a0eb-377d-4ce4-a02e-98082c550913
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODI3NjI5LCJleHAiOjE3Mjg4Mjk0Mjl9.KAhyZwH8jefqrTBN0-DVtMonx7cdB0LUwE3CViYQBQY
 Content-Type: application/json
 
 {
@@ -148,24 +158,44 @@ Content-Type: application/json
 }
 
 ### eliminar un tipo
-DELETE http://localhost:8080/topics/01b34836-3a80-49b9-94f9-6d7b6d27dbaa
+DELETE http://localhost:8000/topics/01b34836-3a80-49b9-94f9-6d7b6d27dbaa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODI3NjI5LCJleHAiOjE3Mjg4Mjk0Mjl9.KAhyZwH8jefqrTBN0-DVtMonx7cdB0LUwE3CViYQBQY
 
 
 
-
+### Test de autenticacion
 
 
 
 ### login
-POST https://stupid-galina-mercurial-80e3a007.koyeb.app/login
+POST http://localhost:8000/login
 Content-Type: application/json
 
 {
-  "email": "davidclaff4@gmail.com", "password": "1234567890"
+  "email": "vargasloaizacristian@gmail.com", "password": "crisvargas2312"
 }
 
+## no es necesario enviar el id del usuario, ya que se toma el id del usuario desde la cookie
+### obtener las asignaturas de un usuario
+GET http://localhost:8000/subjects/user/active
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4Nzg3MTgwLCJleHAiOjE3MjkzOTE5ODB9.ao4YCNZPpKF0X_mYG98ko5C0_vATzjvxfWvD11FUPfk
+
+### refresh-token
+POST http://localhost:8000/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMxNDc5LCJleHAiOjE3Mjk0MzYyNzl9.ImzhyRDsPN_lHduCn7Eeq7bvUYpHzIiW8SJ56_a9aBw"
+}
+
+
 ### logout
-POST https://stupid-galina-mercurial-80e3a007.koyeb.app/logout
+POST http://localhost:8000/logout
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZmNhMTUzYTUtMzAwNy00ZTEyLWIyYjktNmVlZjc2NTEyNjYzIiwiZW1haWwiOiJ2YXJnYXNsb2FpemFjcmlzdGlhbkBnbWFpbC5jb20ifSwiaWF0IjoxNzI4ODMxNDc5LCJleHAiOjE3Mjk0MzYyNzl9.ImzhyRDsPN_lHduCn7Eeq7bvUYpHzIiW8SJ56_a9aBw"
+}
 
 
 

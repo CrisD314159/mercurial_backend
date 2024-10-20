@@ -8,7 +8,6 @@ export class MercurialControllerUser {
 
   // Obtener un usuario dado un id
   getUser = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     const { id } = req.session.user
     if (id) {
       try {
@@ -50,7 +49,6 @@ export class MercurialControllerUser {
 
   // Actualizar un usuario dado un id
   updateUser = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.body) {
       const { id } = req.session.user
       const { name, username, password, image } = req.body
@@ -130,7 +128,6 @@ export class MercurialControllerUser {
 
   // Eliminar un usuario dado un id
   deleteUser = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { id } = req.session.user
       try {

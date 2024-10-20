@@ -34,7 +34,8 @@ export class Task {
       JOIN state s on t.state_id = s.id
       JOIN subject sub on t.subject_id = sub.id
       JOIN topic top on t.topic_id = top.id
-      WHERE t.subject_id = ${id} AND t.state_id = ${statesTask.active};`
+      WHERE t.subject_id = ${id} AND t.state_id = ${statesTask.active}
+      ORDER BY creatio_date DESC;`
     if (!response[0]) return false
     return response
   } // falta agregar método filtrar por tipo

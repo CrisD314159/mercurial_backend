@@ -9,7 +9,6 @@ export default class MercurialControllerTask {
 
   // Obtener una tarea dado un id
   getTaskId = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -24,7 +23,6 @@ export default class MercurialControllerTask {
 
   // Obtener las tareas de una asignatura
   getTasks = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -38,7 +36,6 @@ export default class MercurialControllerTask {
   }
 
   getUserTasks = async (req, res) => {
-    if (req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { id } = req.session.user
       try {
@@ -55,7 +52,6 @@ export default class MercurialControllerTask {
 
   // Crear una tarea
   createTask = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.body) {
       const { tittle, description, subjectId, topicId } = req.body
       const input = {
@@ -79,7 +75,6 @@ export default class MercurialControllerTask {
 
   // Actualizar una tarea dado un id
   updateTask = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.body && req.params.id) {
       const { id } = req.params
       const { tittle, description } = req.body
@@ -104,7 +99,6 @@ export default class MercurialControllerTask {
 
   // Eliminar una tarea
   deleteTask = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {
@@ -119,7 +113,6 @@ export default class MercurialControllerTask {
 
   // Obtener las tareas completadas de un usuario
   getDoneTasks = async (req, res) => {
-    if (req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.session) {
       const { id } = req.session.user
       try {
@@ -136,7 +129,6 @@ export default class MercurialControllerTask {
 
   // Marcar una tarea como completada
   markTaskAsDone = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     const { id } = req.params
     if (id) {
       try {
@@ -144,13 +136,12 @@ export default class MercurialControllerTask {
         if (!response) return res.status(440).json({ success: false, message: 'Task not found' })
         return res.status(200).json({ success: true, message: 'Task marked as done' })
       } catch (error) {
-
+        throw new Error(error)
       }
     }
   }
 
   rollBackTask = async (req, res) => {
-    if (!req.session || req.session === 'expired') return res.status(401).json({ success: false, message: 'Unauthorized' })// Borrar la cookie
     if (req.params.id) {
       const { id } = req.params
       try {
