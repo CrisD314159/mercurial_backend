@@ -6,7 +6,7 @@ import MercurialControllerTask from '../controller/taskController.js'
 import MercurialControllerTopic from '../controller/topicController.js'
 import MercurialControllerLogin from '../controller/loginController.js'
 import ImageController from '../controller/imageController.js'
-import { checkAuth } from '../middleware/checkAuth.js'
+import { checkAuth, checkAuthStatus } from '../middleware/checkAuth.js'
 import { checkRefresh } from '../middleware/refreshTokenMiddleware.js'
 import { refreshToken } from '../model/utils/tokenGeneration.js'
 
@@ -74,7 +74,7 @@ export default function Routes ({ model }) {
 
   // Ruta para refrescar el token de acceso
   router.post('/refresh-token', checkRefresh, refreshToken)
-  router.get('/check-auth', checkRefresh, refreshToken)
+  router.get('/check-auth', checkAuth, checkAuthStatus)
 
   return router
 }
