@@ -16,7 +16,6 @@ export class Login {
     const passwordVerify = await bcrypt.compare(password, userPassword)
     if (userEmail === email && passwordVerify) {
       const accessToken = generateAccessToken({ id: user.id, email: user.email })
-      console.log(fingerprint)
       const refreshToken = await generateRefreshToken({ id: user.id, email: user.email }, fingerprint)
       return { accessToken, refreshToken, data: { userEmail, userImage } }
     } else {

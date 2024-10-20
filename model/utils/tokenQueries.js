@@ -6,16 +6,19 @@ export async function createSession ({ refreshToken, fingerprint, userId }) {
       if (!refreshToken || !fingerprint || !userId) {
         return false
       }
-      const clearSessionsResponse = await clearSessions(userId)
-      if (!clearSessionsResponse) {
-        return false
+      const exists = await sql`select * from user_session where user_id = ${userId}`
+      if (exists[0]) {
+        const clear = await clearSessions(userId)
+        if (!clear) {
+          return false
+        }
       }
       await sql`insert into user_session (token, fingerprint, user_id) values (${refreshToken}, ${fingerprint}, ${userId})`
       return true
     })
     return response
   } catch (error) {
-    throw new Error('Impossible to create session')
+    throw new Error('Impossible to create session', error.message)
   }
 }
 
